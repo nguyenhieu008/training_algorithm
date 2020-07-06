@@ -14,20 +14,21 @@ using namespace std;
 namespace gen_data {
 
 int main() {
-    ofstream fout("sort_data.inp");
+    ofstream fout("sort_data.inp.1");
     int t = 2;
     fout << t << endl;
     
     int n = 200;
     fout << n << endl;
     for (int i = 0; i < n; ++i) {
-        fout << rand() % 10000 << " ";
+        fout << rand() % 100 << " ";
     }
-    n = 100000;
-    fout << n << endl;
+    n = 500000;
+    fout << endl << n << endl;
     for (int i = 0; i < n; ++i) {
         fout << rand() % 10000 << " ";
     }
+    fout.close();
     return 0;
 }
 }

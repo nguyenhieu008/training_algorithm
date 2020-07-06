@@ -43,10 +43,10 @@ public:
     
     void printResult(ofstream &fout, int t) {
         fout << "Case " << t << " takes " << dur.count() << " microseconds:" << endl;
-        for (int i = 0; i < n; ++i) {
-            fout << x[i] << " ";
-        }
-        fout << endl;
+//        for (int i = 0; i < n; ++i) {
+//            fout << x[i] << " ";
+//        }
+//        fout << endl;
     }
     
     void selectionSort();
@@ -68,6 +68,7 @@ private:
     bool checkBit(int number, int b);
     void adjust(int t_root, int t_end);
     int maxKey();
+    int getNumerical(int val, int radix, int radixPow);
 };
 
 }

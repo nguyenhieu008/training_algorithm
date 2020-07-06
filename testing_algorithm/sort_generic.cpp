@@ -12,18 +12,18 @@ using namespace sorting;
 //namespace sorting {
 
 int main() {
-    ifstream fin("sort_data.inp");
-    ofstream fout("sort_result.out");
+    ifstream fin("sort_data.inp.1");
+    ofstream fout("sort_result.out.1");
     
     Sort s;
     int T, t;
     
     fin >> T;
     
-    fout << "Running exchange radix sort!" << endl;
+    fout << "Running straight radix sort!" << endl;
     for (t = 1; t <= T; ++t) {
         s.input(fin);
-        s.exchangeRadixSort();
+        s.straightRadixSort();
         s.printResult(fout, t);
     }
     
