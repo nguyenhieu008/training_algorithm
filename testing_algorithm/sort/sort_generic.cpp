@@ -20,10 +20,10 @@ int main() {
     
     fin >> T;
     
-    fout << "Running heap sort!" << endl;
+    fout << "Running exchange radix sort!" << endl;
     for (t = 1; t <= T; ++t) {
         s.input(fin);
-        s.heapSort();
+        s.exchangeRadixSort();
         s.printResult(fout, t);
     }
     

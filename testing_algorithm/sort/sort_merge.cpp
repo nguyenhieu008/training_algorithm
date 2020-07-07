@@ -21,7 +21,8 @@ void Sort::mergeByLength(int a[], int b[], int l) {
     else for (int i = r; i < n; ++i) b[i] = a[i];
 }
 void Sort::mergeSort() {
-    int length = 2;
+    start = high_resolution_clock::now();
+    int length = 1;
     int *y = new int[n];
     bool flag = true;
 
@@ -33,5 +34,8 @@ void Sort::mergeSort() {
     }
     if (!flag) for (int i = 0; i < n; ++i) x[i] = y[i];
     delete[] y;
+    
+    stop = high_resolution_clock::now();
+    dur = duration_cast<microseconds>(stop - start);
 }
 }
