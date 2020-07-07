@@ -20,10 +20,10 @@ int main() {
     
     fin >> T;
     
-    fout << "Running straight radix sort!" << endl;
+    fout << "Running heap sort!" << endl;
     for (t = 1; t <= T; ++t) {
         s.input(fin);
-        s.straightRadixSort();
+        s.heapSort();
         s.printResult(fout, t);
     }
     

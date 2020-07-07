@@ -21,7 +21,11 @@ namespace sorting {
 
 class Sort {
 public:
-    Sort() : n(0) {
+    Sort() : n(0), x(new int[MAX_SIZE]){
+    }
+
+    ~Sort() {
+        delete[] x;
     }
     
     void input(ifstream &fin) {
@@ -57,9 +61,10 @@ public:
     void distributionCounting();
     void exchangeRadixSort();
     void straightRadixSort();
+    void mergeSort();
     
 private:
-    int n, x[MAX_SIZE];
+    int n, *x;
     time_point<high_resolution_clock> start, stop;
     microseconds dur;
     
@@ -69,6 +74,8 @@ private:
     void adjust(int t_root, int t_end);
     int maxKey();
     int getNumerical(int val, int radix, int radixPow);
+    void mergeByLength(int a[], int b[], int l);
+    void merge(int a[], int b[], int r, int s, int t);
 };
 
 }
