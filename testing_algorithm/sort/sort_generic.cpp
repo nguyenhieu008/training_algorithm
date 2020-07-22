@@ -9,7 +9,7 @@
 
 using namespace sorting;
 
-//namespace sorting {
+namespace sorting {
 
 int main() {
     ifstream fin("sort_data.inp.1");
@@ -33,4 +33,4 @@ int main() {
     return 0;
 }
 
-//}
+}
