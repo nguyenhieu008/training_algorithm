@@ -8,6 +8,7 @@
             "args": [
                 "-g",
                 "${workspaceFolder}\\*.cpp",
+                "${workspaceFolder}\\graph\\*.cpp",
                 "-o",
                 "${fileDirname}\\${fileBasenameNoExtension}.exe"
             ],
