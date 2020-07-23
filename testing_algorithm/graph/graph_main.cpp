@@ -3,10 +3,8 @@
 namespace graph {
 
 void Graph::mainGraph() {
-    Graph g;
-    g.input("graph.inp", "graph.out");
-    g.dfsBacktrack();
-    g.printPath();
+    GraphConnectivity g("graph_connectivity.inp", "graph_connectivity.out");
+    g.warshall();
 }
 }
     

@@ -9,7 +9,7 @@
 
 namespace graph {
 
-void Graph::dfs(int u) {
+void GraphSearch::dfs(int u) {
     fout << u << ", ";
     for (int v = 1; v <= n; ++v) {
         if (0 == trace[v] && a[u][v]) {
@@ -19,22 +19,7 @@ void Graph::dfs(int u) {
     }
 }
 
-void Graph::push(int u){
-    if (_stackSize >= n) {
-        cerr << "Error: Push more than max size" << endl;
-        exit(1);
-    }
-    _stack[_stackSize++] = u;
-}
-int Graph::pop() {
-    if (_stackSize <= 0) {
-        cerr << "Warning: Trying to pop empty stack" << endl;
-        return NO_NODE;
-    }
-    return _stack[--_stackSize];
-}
-
-void Graph::dfsStack() {
+void GraphSearch::dfsStack() {
     fout << "Running DFS using stack:" << endl;
     fout << "From " << s << " you can visit:" << endl;
     push(s);
@@ -55,7 +40,7 @@ void Graph::dfsStack() {
     fout << endl;
 }
 
-void Graph::dfsBacktrack() {
+void GraphSearch::dfsBacktrack() {
     fout << "Running DFS using backtrack:" << endl;
     fout << "From " << s << " you can visit:" << endl;
     trace[s] = VIRTUAL_ROOT;
@@ -67,7 +52,7 @@ void Graph::dfsBacktrack() {
     fout << endl;
 }
 
-int Graph::findNext(int u) {
+int GraphSearch::findNext(int u) {
     while (u != VIRTUAL_ROOT) {
         for (int v = 1; v <= n; ++v) {
             if (NO_NODE == trace[v] && a[u][v]){
