@@ -10,7 +10,8 @@ void SingleGraph::input() {
     int u, v;
     for (int i = 0 ; i < m; ++i) {
         fin >> u >> v;
-        a[u][v] = a[v][u] = true;
+        a[u][v] = true;
+        if (UNDIRECTED == type) a[v][u] = true;
     }
 }
 
@@ -31,10 +32,14 @@ void GraphSearch::input() {
     SingleGraph::input();
 }
 
+GraphConnectivity::GraphConnectivity(const string &inFile, const string &outFile, const GraphType &type) : SingleGraph(inFile, outFile, type), numbering{0, }, count(0), componentCount(1) {
+    memset(_free, true, sizeof(_free));
+    input();
+}
+
 void GraphConnectivity::input() {
     Graph::input();
-    for (int i = 1; i <= n; ++i) a[i][i] = true;
-    memset(_free, true, sizeof(_free));
+    if (DIRECTED == type) for (int i = 1; i <= n; ++i) a[i][i] = true;
     SingleGraph::input();
 }
 
@@ -51,14 +56,14 @@ void GraphSearch::printPath() {
     }
 }
 
-void GraphSearch::push(int u){
+void Graph::push(int u){
     if (_stackSize >= n) {
         cerr << "Error: Push more than max size" << endl;
         exit(1);
     }
     _stack[_stackSize++] = u;
 }
-int GraphSearch::pop() {
+int Graph::pop() {
     if (_stackSize <= 0) {
         cerr << "Warning: Trying to pop empty stack" << endl;
         return NO_NODE;
@@ -66,14 +71,14 @@ int GraphSearch::pop() {
     return _stack[--_stackSize];
 }
 
-void GraphSearch::pushQueue(int u) {
+void Graph::pushQueue(int u) {
     if (_last >= n) {
         cerr << "Error: Queue is at max. Cannot push" << endl;
         exit(2);
     }  
     _queue[_last++] = u;
 }
-int GraphSearch::popQueue() {
+int Graph::popQueue() {
     if (_first >= _last) {
         cerr << "Warning: Queue is empty" << endl;
         return NO_NODE;
@@ -81,7 +86,7 @@ int GraphSearch::popQueue() {
     return _queue[_first++];
 }
 
-bool GraphSearch::queueEmpty() {
+bool Graph::queueEmpty() {
     return _first >= _last;
 }
 
