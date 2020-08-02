@@ -3,8 +3,8 @@
 namespace graph {
 
 void Graph::mainGraph() {
-    GraphConnectivity g("graph_connectivity_bridges.inp", "graph_connectivity.out", UNDIRECTED);
-    g.detectBridges();
+    GraphCircuit g("euler.inp", "euler.out");
+    g.findEulerUsingStack();
 }
 }
     

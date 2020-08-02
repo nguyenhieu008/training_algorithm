@@ -1,4 +1,4 @@
-#include "graph\graph_generic.h"
+#include "graph/graph_generic.h"
 
 using namespace graph;
 int main() {

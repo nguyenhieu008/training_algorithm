@@ -11,8 +11,8 @@ namespace graph {
 
 void GraphSearch::dfs(int u) {
     fout << u << ", ";
-    for (int v = 1; v <= n; ++v) {
-        if (0 == trace[v] && a[u][v]) {
+    for (int v = 1; v <= g.n(); ++v) {
+        if (0 == trace[v] && g[u][v]) {
             trace[v] = u;
             dfs(v);
         }
@@ -22,16 +22,16 @@ void GraphSearch::dfs(int u) {
 void GraphSearch::dfsStack() {
     fout << "Running DFS using stack:" << endl;
     fout << "From " << s << " you can visit:" << endl;
-    push(s);
+    Util::push(s);
     trace[s] = VIRTUAL_ROOT;
     fout << s << ", ";
 
-    while (_stackSize > 0) {
-        int u = pop();
-        for (int v = 1; v <= n; ++v) {
-            if (0 == trace[v] && a[u][v]){
+    while (!Util::empty()) {
+        int u = Util::pop();
+        for (int v = 1; v <= g.n(); ++v) {
+            if (0 == trace[v] && g[u][v]){
                 fout << v << ", ";
-                push(u); push(v);
+                Util::push(u); Util::push(v);
                 trace[v] = u;
                 break;
             }
@@ -54,8 +54,8 @@ void GraphSearch::dfsBacktrack() {
 
 int GraphSearch::findNext(int u) {
     while (u != VIRTUAL_ROOT) {
-        for (int v = 1; v <= n; ++v) {
-            if (NO_NODE == trace[v] && a[u][v]){
+        for (int v = 1; v <= g.n(); ++v) {
+            if (NO_NODE == trace[v] && g[u][v]){
                 trace[v] = u;
                 return v;
             }
