@@ -20,7 +20,16 @@ GraphAlgorithm::GraphAlgorithm(const string &inFile, const string &outFile, cons
 }
 void InputGraph::input(const bool &finding) {
     _isFindingPath = finding;
-    
+
+    if (WEIGHT == g.wType()) {
+        for (int i = 1; i <= g.n(); ++i) {
+            g[i][i] = 0;
+            for (int j = 1; j <= g.n(); ++j) {
+                if (i != j) g[i][j] = INFINITY;
+            }
+        }
+    }
+
     if (SINGLE == g.nType()) {
         int u, v, c, m;
         fin >> m;

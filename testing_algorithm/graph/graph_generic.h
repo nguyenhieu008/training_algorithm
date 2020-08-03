@@ -4,7 +4,7 @@
 using namespace std;
 namespace graph {
 static const int MAX = 101;
-static const int INFINITY = MAX + 1;
+static const int INFINITY = 1000001;
 static const int VIRTUAL_ROOT = -1;
 static const int NO_NODE = 0;
 enum GraphDirectivityType{
