@@ -3,8 +3,9 @@
 namespace graph {
 
 void Graph::mainGraph() {
-    GraphCircuit g("euler.inp", "euler.out");
-    g.findEulerUsingStack();
+    GraphAlgorithm g("data/hamilton.inp", "data/graph.out", UNDIRECTED, SINGLE);
+    g.input();
+    g.findAllHamiltonCircuits();
 }
 }
     

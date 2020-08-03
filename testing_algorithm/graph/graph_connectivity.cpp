@@ -1,7 +1,7 @@
 #include "graph_generic.h"
 
 namespace graph {
-void GraphSearch::listConnectedComponent() {
+void GraphAlgorithm::listConnectedComponent() {
     int connected = 1;
     for (int u = 1; u <= g.n(); ++u) {
         if (NO_NODE == trace[u]) {
@@ -14,8 +14,12 @@ void GraphSearch::listConnectedComponent() {
     }
 }
 
-void GraphConnectivity::warshall() {
+void GraphAlgorithm::warshall() {
     fout << "Running warshall algorithm:" << endl;
+    if (DIRECTED == g.dType()) {
+        cerr << "Unable to work on directed graph!" << endl;
+        exit(4);
+    }
     for (int k = 1; k <= g.n(); ++k) {
         for (int u = 1; u <= g.n(); ++u) {
             for (int v = 1; v <= g.n(); ++v) {
@@ -38,7 +42,7 @@ void GraphConnectivity::warshall() {
     }
 }
 
-void GraphConnectivity::visit(int u) {
+void GraphAlgorithm::visit(int u) {
     low[u] = numbering[u] = count++;
     Util::push(u);
     for (int v = 1; v <= g.n(); ++v) {
@@ -61,8 +65,12 @@ void GraphConnectivity::visit(int u) {
     }
 }
 
-void GraphConnectivity::tarjan() {
+void GraphAlgorithm::tarjan() {
     fout << "Running tarjan algorithm:" << endl;
+    if (UNDIRECTED == g.dType()) {
+        cerr << "Unable to work on directed graph!" << endl;
+        exit(4);
+    }
     for (int i = 1; i <= g.n(); ++i) {
         g[0][i] = true;
     }
@@ -70,7 +78,7 @@ void GraphConnectivity::tarjan() {
     visit(0);
 }
 
-void GraphConnectivity::directedEdges(int u) {
+void GraphAlgorithm::directedEdges(int u) {
     numbering[u] = count++;
     low[u] = INFINITY;
     for (int v = 1; v <= g.n(); ++v) {
@@ -88,8 +96,12 @@ void GraphConnectivity::directedEdges(int u) {
     };
 }
 
-void GraphConnectivity::detectBridges() {
+void GraphAlgorithm::detectBridges() {
     fout << "Detecting bridges using directing edges DFS:" << endl;
+    if (DIRECTED == g.dType()) {
+        cerr << "Unable to work on directed graph!" << endl;
+        exit(4);
+    }
     fout << "Bridges:" << endl;
     for (int u = 1; u <= g.n(); ++u) {
         if (0 == numbering[u]) directedEdges(u);
@@ -102,7 +114,7 @@ void GraphConnectivity::detectBridges() {
     }
 }
 
-void GraphConnectivity::visitCutVertices(int u) {
+void GraphAlgorithm::visitCutVertices(int u) {
     numbering[u] = count++;
     low[u] = numbering[u];
     for (int v = 1; v <= g.n(); ++v) {
@@ -120,8 +132,12 @@ void GraphConnectivity::visitCutVertices(int u) {
     }
 }
 
-void GraphConnectivity::detectCutVertices() {
+void GraphAlgorithm::detectCutVertices() {
     fout << "Detecting cut vertices:" << endl;
+    if (DIRECTED == g.dType()) {
+        cerr << "Unable to work on directed graph!" << endl;
+        exit(4);
+    }
     for (int u = 1; u <= g.n(); ++u) {
         if (0 == numbering[u]) {
             visitCutVertices(u);

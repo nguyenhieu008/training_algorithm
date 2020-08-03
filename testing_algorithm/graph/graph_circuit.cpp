@@ -8,7 +8,7 @@
 #include "graph_generic.h"
 
 namespace graph {
-bool GraphCircuit::canGoBack(const int &x, const int &y) {
+bool GraphAlgorithm::canGoBack(const int &x, const int &y) {
 //    cout << "Trying edge: " << x << "->" << y << endl;
     --g[x][y]; --g[y][x];
     bool visited[MAX] = {false, };
@@ -35,8 +35,12 @@ bool GraphCircuit::canGoBack(const int &x, const int &y) {
     ++g[x][y]; ++g[y][x];
     return visited[x];
 }
-void GraphCircuit::fleury() {
+void GraphAlgorithm::fleury() {
     fout << "Running fleury algorithm to find Euler circuit:" << endl;
+    if (DIRECTED == g.dType()) {
+        cerr << "Unable to work on directed graph!" << endl;
+        exit(4);
+    }
     int current, next;
     current = 1;
     fout << current << " ";
@@ -60,8 +64,12 @@ void GraphCircuit::fleury() {
     } while(NO_NODE != next);
 }
 
-void GraphCircuit::findEulerUsingStack() {
+void GraphAlgorithm::findEulerUsingStack() {
     fout << "Finding Euler circuit using stack:" << endl;
+    if (DIRECTED == g.dType()) {
+        cerr << "Unable to work on directed graph!" << endl;
+        exit(4);
+    }
     Util::push(1);
     while (!Util::empty()) {
         int u = Util::get();
@@ -77,4 +85,38 @@ void GraphCircuit::findEulerUsingStack() {
         }
     }
 }
+
+void GraphAlgorithm::printHamiltonCircuit() {
+    for (int i = 1; i <= g.n(); ++i) fout << x[i] << " ";
+    fout << x[1] << endl;
+}
+
+void GraphAlgorithm::_try(int i) {
+    for (int j = 1; j <= g.n(); ++j) {
+        if (_free[j] && g[x[i-1]][j]) {
+            x[i] = j;
+            if (i < g.n()) {
+                _free[j] = false;
+                _try(i + 1);
+                _free[j] = true;
+            }
+            else {
+                if (g[j][x[1]]) {
+                    printHamiltonCircuit();
+                }
+            }
+        }
+    }
+}
+
+void GraphAlgorithm::findAllHamiltonCircuits() {
+    fout << "Listing Hamilton circuits using backtracking:" << endl;
+    if (DIRECTED == g.dType()) {
+        cerr << "Unable to work on directed graph!" << endl;
+        exit(4);
+    }
+    x[1] = 1; _free[1] = false;
+    _try(2);
+}
+
 }

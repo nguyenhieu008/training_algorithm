@@ -9,7 +9,7 @@
 
 namespace graph {
 
-void GraphSearch::dfs(int u) {
+void GraphAlgorithm::dfs(int u) {
     fout << u << ", ";
     for (int v = 1; v <= g.n(); ++v) {
         if (0 == trace[v] && g[u][v]) {
@@ -19,7 +19,7 @@ void GraphSearch::dfs(int u) {
     }
 }
 
-void GraphSearch::dfsStack() {
+void GraphAlgorithm::dfsStack() {
     fout << "Running DFS using stack:" << endl;
     fout << "From " << s << " you can visit:" << endl;
     Util::push(s);
@@ -40,7 +40,7 @@ void GraphSearch::dfsStack() {
     fout << endl;
 }
 
-void GraphSearch::dfsBacktrack() {
+void GraphAlgorithm::dfsBacktrack() {
     fout << "Running DFS using backtrack:" << endl;
     fout << "From " << s << " you can visit:" << endl;
     trace[s] = VIRTUAL_ROOT;
@@ -52,7 +52,7 @@ void GraphSearch::dfsBacktrack() {
     fout << endl;
 }
 
-int GraphSearch::findNext(int u) {
+int GraphAlgorithm::findNext(int u) {
     while (u != VIRTUAL_ROOT) {
         for (int v = 1; v <= g.n(); ++v) {
             if (NO_NODE == trace[v] && g[u][v]){

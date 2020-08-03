@@ -15,6 +15,10 @@ enum GraphNumerousType {
     SINGLE,
     MULTIPLE
 };
+enum GraphWeightType {
+    UNWEIGHT,
+    WEIGHT
+};
 
 class Util {
 public:
@@ -39,7 +43,8 @@ private:
 
 class Graph {
 public:
-    Graph(const GraphDirectivityType &dType, const GraphNumerousType &nType) : a{{0, }, }, _dType(dType), _nType(nType) {
+    Graph(const GraphDirectivityType &dType, const GraphNumerousType &nType, const GraphWeightType &wType) : 
+        a{{0, }, }, _dType(dType), _nType(nType), _wType(wType) {
     }
     virtual ~Graph() {
     }
@@ -62,40 +67,50 @@ public:
     GraphNumerousType nType() {
         return _nType;
     }
+    GraphWeightType wType() {
+        return _wType;
+    }
 
 private:
     int _n;
     GraphDirectivityType _dType;
     GraphNumerousType _nType;
+    GraphWeightType _wType;
     int a[MAX][MAX];
 };
 
 
 class InputGraph {
 public:
-    InputGraph(const string &inFile, const string &outFile, const GraphDirectivityType &dType, const GraphNumerousType &nType) : fin(inFile), fout(outFile), g(dType, nType) {
-        fin >> g.n();
+    InputGraph(const string &inFile, const string &outFile, const GraphDirectivityType &dType, const GraphNumerousType &nType, const GraphWeightType &wType);
+    ~InputGraph() {
+        fin.close();
+        fout.close();
     }
-    virtual void input();
+
+    void input(const bool &finding = false);
     void printGraph();
     
+    // void setIsFindingPath(const bool &finding) {
+    //     _isFindingPath = finding;
+    // }
+    // bool isFindingPath() const {
+    //     return _isFindingPath;
+    // }
     
 protected:
     ifstream fin;
     ofstream fout;
     Graph g;
+    bool _isFindingPath;
+    int s, f;
 };
 
-class GraphSearch : public InputGraph {
+class GraphAlgorithm : public InputGraph {
 public:
-    GraphSearch(const string &inFile = "graph.inp", const string &outFile = "graph.out") : InputGraph(inFile, outFile, UNDIRECTED, SINGLE), trace{NO_NODE, }{
-        input();
-        printGraph();
+    GraphAlgorithm(const string &inFile = "graph.inp", const string &outFile = "graph.out", const GraphDirectivityType &type = UNDIRECTED, const GraphNumerousType &nType = SINGLE, const GraphWeightType &wType = UNWEIGHT);
+    virtual ~GraphAlgorithm(){    
     }
-    virtual ~GraphSearch(){
-        
-    }
-    virtual void input();
 
     void dfs() {
         fout << "Running DFS:" << endl;
@@ -104,54 +119,44 @@ public:
         dfs(s);
         fout << endl;
     }
+
+    // Graph search
     void dfsStack();
     void dfsBacktrack();
-
     void bfs();
     void bfsLoang();
-
+    void listConnectedComponent();
     void printPath();
 
-    void listConnectedComponent();
-
-protected:
-    int s, f;
-    int trace[MAX];
-
-    void dfs(int u);
-    int findNext(int u);
-    void loang(int t_old[], int t_oldSize, int t_new[], int &t_newSize);
-};
-
-class GraphConnectivity : public InputGraph {
-public:
-    GraphConnectivity(const string &inFile = "graph_connectivity.inp", const string &outFile = "graph_connectivity.out", const GraphDirectivityType &type = UNDIRECTED);
+    // Graph connectivity
     void warshall();
-
     void tarjan();
     void detectBridges();
     void detectCutVertices();
-    
-    
-private:
-    void visit(int u);
-    void directedEdges(int u);
-    void visitCutVertices(int u);
-    
-    bool _free[MAX], _mark[MAX];
-    int numbering[MAX], low[MAX], count, componentCount;
-    int nC[MAX];
 
-};
-
-class GraphCircuit : public InputGraph {
-public:
-    GraphCircuit(const string &inFile = "graph_circuit.inp", const string &outFile = "graph_circuit.out", const GraphDirectivityType &dType = UNDIRECTED, const GraphNumerousType &nType = MULTIPLE);
-    
+    // Graph circuits
     void fleury();
     void findEulerUsingStack();
+    void findAllHamiltonCircuits();
 
-private:
-    bool canGoBack(const int &x, const int &y);
+protected:
+    int trace[MAX];
+    bool _free[MAX];
+    bool _mark[MAX]; // cut vertices, mark node is cut vertices?
+    int nC[MAX]; // cut vertices, num of children
+    int x[MAX]; // hamilton path
+    int numbering[MAX], low[MAX], count, componentCount;
+
+    void dfs(int u);
+    int findNext(int u); //dfs
+    void loang(int t_old[], int t_oldSize, int t_new[], int &t_newSize); //bfs
+
+    void visit(int u); //tarjan
+    void directedEdges(int u); //detect edges
+    void visitCutVertices(int u);
+
+    bool canGoBack(const int &x, const int &y); // fleury
+    void _try(int i); //euler stack
+    void printHamiltonCircuit();
 };
 }

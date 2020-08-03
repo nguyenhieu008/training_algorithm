@@ -3,38 +3,41 @@
 
 namespace graph {
 
-GraphConnectivity::GraphConnectivity(const string &inFile, const string &outFile, const GraphDirectivityType &dType) : InputGraph(inFile, outFile, dType, SINGLE), numbering{0, }, count(0), componentCount(1), nC{0, }, _mark{false, } {
-    memset(_free, true, sizeof(_free));
-    if (DIRECTED == g.dType()) for (int i = 1; i <= g.n(); ++i) g[i][i] = true;
-    input();
-}
-
-GraphCircuit::GraphCircuit(const string &inFile, const string &outFile, const GraphDirectivityType &dType, const GraphNumerousType &nType) : InputGraph(inFile, outFile, dType, nType) {
-    input();
-    printGraph();
-}
-
-
-void GraphSearch::printPath() {
-    fout << "Path from " << s << " to " << f << ": ";
-    if (0 == trace[f]) fout << "not found!" << endl;
-    else {
-        while (f != s) {
-            fout << f << "<-";
-            f = trace[f];
-        }
-        fout << s << endl;
+InputGraph::InputGraph(const string &inFile, const string &outFile, const GraphDirectivityType &dType, const GraphNumerousType &nType, const GraphWeightType &wType) : 
+    fin(inFile), fout(outFile), g(dType, nType, wType), _isFindingPath(false) {
+    if (MULTIPLE == g.nType() && WEIGHT == g.wType()) {
+        cerr << "ERROR: Dont support weighted multiple graph!";
+        exit(1);
+        return;
     }
+    fin >> g.n();
 }
 
-void InputGraph::input() {
+GraphAlgorithm::GraphAlgorithm(const string &inFile, const string &outFile, const GraphDirectivityType &dType, const GraphNumerousType &nType, const GraphWeightType &wType) : 
+    InputGraph(inFile, outFile, dType, nType, wType), trace{NO_NODE, }, numbering{0, }, count(0), componentCount(1), nC{0, }, _mark{false, }, x{NO_NODE, } {
+    memset(_free, true, sizeof(_free));
+    
+}
+void InputGraph::input(const bool &finding) {
+    _isFindingPath = finding;
+    
     if (SINGLE == g.nType()) {
-        int u, v, m;
+        int u, v, c, m;
         fin >> m;
+        
+        if (_isFindingPath) fin >> s >> f;
+
         for (int i = 0 ; i < m; ++i) {
             fin >> u >> v;
-            g[u][v] = true;
-            if (UNDIRECTED == g.dType()) g[v][u] = true;
+            if (WEIGHT == g.wType()) {
+                fin >> c;
+                g[u][v] = c;
+                if (UNDIRECTED == g.dType()) g[v][u] = c;
+            }
+            else {
+                g[u][v] = true;
+                if (UNDIRECTED == g.dType()) g[v][u] = true;
+            }
         }
     }
     else if (MULTIPLE == g.nType()) {
@@ -55,20 +58,30 @@ void InputGraph::input() {
         fout << "ERROR: Wrong directivity type of graph!";
         exit(3);
     }
+
+    printGraph();
 }
 
-void GraphSearch::input() {
-    int m, u, v;
-    fin >> m >> s >> f;
-    for (int i = 0 ; i < m; ++i) {
-        fin >> u >> v;
-        g[u][v]++;
-        if (UNDIRECTED == g.dType()) g[v][u]++;
+
+void GraphAlgorithm::printPath() {
+    if (!_isFindingPath) {
+        cerr << "Warning: Trying to print path but not enable searching!" << endl;
+        return;
+    }
+    fout << "Path from " << s << " to " << f << ": ";
+    if (0 == trace[f]) fout << "not found!" << endl;
+    else {
+        while (f != s) {
+            fout << f << "<-";
+            f = trace[f];
+        }
+        fout << s << endl;
     }
 }
 
+
 void InputGraph::printGraph() {
-    fout << "Printing " << (UNDIRECTED == g.dType()? "Undirected" : DIRECTED == g.dType()? "Directed" : "Undefined") <<  " Graph: " << endl;
+    fout << "Printing " << (UNDIRECTED == g.dType()? "Undirected, " : "Directed, ") << (SINGLE == g.nType()? "Single, " : "Multiple, ") << (UNWEIGHT == g.wType()? "Unweighted " : " Weighted ") <<  "graph: " << endl;
     for (int i = 1; i <= g.n(); ++i) {
         for (int j = 1; j <= g.n(); ++j) {
             fout << g[i][j];

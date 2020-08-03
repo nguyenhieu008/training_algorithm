@@ -1,7 +1,7 @@
 #include "graph_generic.h"
 
 namespace graph {
-void GraphSearch::bfs() {
+void GraphAlgorithm::bfs() {
     fout << "Running BFS:" << endl;
     fout << "From " << s << " you can visit: " << endl;
     trace[s] = VIRTUAL_ROOT;
@@ -22,7 +22,7 @@ void GraphSearch::bfs() {
     
 }
 
-void GraphSearch::loang(int t_old[], int t_oldSize, int t_new[], int &t_newSize) {
+void GraphAlgorithm::loang(int t_old[], int t_oldSize, int t_new[], int &t_newSize) {
     int newSize = 0;
     for (int i = 0; i < t_oldSize; ++i) {
         int u = t_old[i];
@@ -37,7 +37,7 @@ void GraphSearch::loang(int t_old[], int t_oldSize, int t_new[], int &t_newSize)
     t_newSize = newSize;
 }
 
-void GraphSearch::bfsLoang() {
+void GraphAlgorithm::bfsLoang() {
     fout << "Running BFS loang: " << endl;
     fout << "From " << s << " you can visit: " << endl;
     
