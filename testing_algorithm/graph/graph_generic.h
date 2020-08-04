@@ -3,8 +3,9 @@
 
 using namespace std;
 namespace graph {
-static const int MAX = 101;
-static const int INFINITY = 1000001;
+static const int MAX = 5001;
+static const int MAX_EDGES = 10001;
+static const int INFINITY = 1000000000;
 static const int VIRTUAL_ROOT = -1;
 static const int NO_NODE = 0;
 enum GraphDirectivityType{
@@ -38,7 +39,6 @@ public:
 private:
     static int _stack[MAX], _stackSize;
     static int _queue[MAX], _first, _last;
-
 };
 
 class Graph {
@@ -60,6 +60,15 @@ public:
     int* operator[](const int &i) {
         return a[i];
     }
+    int& header(const int &i) {
+        return _header[i];
+    }
+    int& adj(const int &i) {
+        return _adj[i];
+    }
+    long long& adjCost(const int &i) {
+        return _adjCost[i];
+    }
     
     GraphDirectivityType dType() {
         return _dType;
@@ -77,6 +86,9 @@ private:
     GraphNumerousType _nType;
     GraphWeightType _wType;
     int a[MAX][MAX];
+    int _adj[MAX_EDGES];
+    long long _adjCost[MAX_EDGES];
+    int _header[MAX+1];
 };
 
 
@@ -90,13 +102,6 @@ public:
 
     void input(const bool &finding = false);
     void printGraph();
-    
-    // void setIsFindingPath(const bool &finding) {
-    //     _isFindingPath = finding;
-    // }
-    // bool isFindingPath() const {
-    //     return _isFindingPath;
-    // }
     
 protected:
     ifstream fin;
@@ -139,6 +144,11 @@ public:
     void findEulerUsingStack();
     void findAllHamiltonCircuits();
 
+    // Shortest path;
+    void fordBellman();
+    void dijkstra();
+    void dijkstraHeap();
+
 protected:
     int trace[MAX];
     bool _free[MAX];
@@ -146,6 +156,10 @@ protected:
     int nC[MAX]; // cut vertices, num of children
     int x[MAX]; // hamilton path
     int numbering[MAX], low[MAX], count, componentCount;
+    long long d[MAX]; //shortest path
+    int _heap[MAX]; // _heap[i] = u : index of node - g[u] - ordered by its d[u]
+    int _pos[MAX]; // _pos[v] = i - index of node v in heap - heap[pos[v]] = v
+    int nHeap; // size of _heap
 
     void dfs(int u);
     int findNext(int u); //dfs
@@ -158,5 +172,8 @@ protected:
     bool canGoBack(const int &x, const int &y); // fleury
     void _try(int i); //euler stack
     void printHamiltonCircuit();
+
+    void printShortestPath(); // Ford Bellman, Dijkstra
+    void updateHeap(int v); // Dijkstra heap
 };
 }

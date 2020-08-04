@@ -38,7 +38,7 @@ bool GraphAlgorithm::canGoBack(const int &x, const int &y) {
 void GraphAlgorithm::fleury() {
     fout << "Running fleury algorithm to find Euler circuit:" << endl;
     if (DIRECTED == g.dType()) {
-        cerr << "Unable to work on directed graph!" << endl;
+        fout << "Unable to work on directed graph!" << endl;
         exit(4);
     }
     int current, next;
@@ -67,7 +67,7 @@ void GraphAlgorithm::fleury() {
 void GraphAlgorithm::findEulerUsingStack() {
     fout << "Finding Euler circuit using stack:" << endl;
     if (DIRECTED == g.dType()) {
-        cerr << "Unable to work on directed graph!" << endl;
+        fout << "Unable to work on directed graph!" << endl;
         exit(4);
     }
     Util::push(1);
@@ -112,7 +112,7 @@ void GraphAlgorithm::_try(int i) {
 void GraphAlgorithm::findAllHamiltonCircuits() {
     fout << "Listing Hamilton circuits using backtracking:" << endl;
     if (DIRECTED == g.dType()) {
-        cerr << "Unable to work on directed graph!" << endl;
+        fout << "Unable to work on directed graph!" << endl;
         exit(4);
     }
     x[1] = 1; _free[1] = false;

@@ -17,7 +17,7 @@ void GraphAlgorithm::listConnectedComponent() {
 void GraphAlgorithm::warshall() {
     fout << "Running warshall algorithm:" << endl;
     if (DIRECTED == g.dType()) {
-        cerr << "Unable to work on directed graph!" << endl;
+        fout << "Unable to work on directed graph!" << endl;
         exit(4);
     }
     for (int k = 1; k <= g.n(); ++k) {
@@ -68,7 +68,7 @@ void GraphAlgorithm::visit(int u) {
 void GraphAlgorithm::tarjan() {
     fout << "Running tarjan algorithm:" << endl;
     if (UNDIRECTED == g.dType()) {
-        cerr << "Unable to work on directed graph!" << endl;
+        fout << "Unable to work on directed graph!" << endl;
         exit(4);
     }
     for (int i = 1; i <= g.n(); ++i) {
@@ -99,7 +99,7 @@ void GraphAlgorithm::directedEdges(int u) {
 void GraphAlgorithm::detectBridges() {
     fout << "Detecting bridges using directing edges DFS:" << endl;
     if (DIRECTED == g.dType()) {
-        cerr << "Unable to work on directed graph!" << endl;
+        fout << "Unable to work on directed graph!" << endl;
         exit(4);
     }
     fout << "Bridges:" << endl;
@@ -135,7 +135,7 @@ void GraphAlgorithm::visitCutVertices(int u) {
 void GraphAlgorithm::detectCutVertices() {
     fout << "Detecting cut vertices:" << endl;
     if (DIRECTED == g.dType()) {
-        cerr << "Unable to work on directed graph!" << endl;
+        fout << "Unable to work on directed graph!" << endl;
         exit(4);
     }
     for (int u = 1; u <= g.n(); ++u) {
