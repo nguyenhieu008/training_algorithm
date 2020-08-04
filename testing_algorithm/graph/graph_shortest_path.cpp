@@ -93,7 +93,29 @@ void GraphAlgorithm::updateHeap(int v) {
     while (parent > 0 && (d[_heap[parent]] > d[v])) {
         _heap[child] = _heap[parent];
         _pos[_heap[child]] = child;
+        child = parent;
+        parent = child / 2;
     }
+    _heap[child] = v;
+    _pos[v] = child;
+}
+
+int GraphAlgorithm::popHeap() {
+    int ret = _heap[1];
+    int r, c, v;
+    v = _heap[nHeap--];
+    r = 1;
+    while (r * 2 <= nHeap) {
+        c = r * 2;
+        if (c < nHeap && (d[_heap[c+1]] < d[_heap[c]])) ++c;
+        if (d[v] <= d[_heap[c]]) break;
+        _heap[r] = _heap[c];
+        _pos[_heap[r]] = r;
+        r = c;
+    }
+    _heap[r] = v;
+    _pos[v] = r;
+    return ret;
 }
 
 void GraphAlgorithm::dijkstraHeap() {
@@ -103,6 +125,75 @@ void GraphAlgorithm::dijkstraHeap() {
         return;
     }
     d[s] = 0;
+    updateHeap(s);
+    do {
+        int u = popHeap();
+//        fout << "Stablize node " << u << endl;
+        if (f == u) break;
+        _free[u] = false;
+//        fout << "header[" << u << "] = " << g.header(u) << " header[" << u+1 << "] = " << g.header(u+1) << endl;
+        for (int iv = g.header(u) + 1; iv <= g.header(u+1); ++iv) {
+            int v = g.adj(iv);
+//            fout << "Checking adjacent node " << v << endl;
+            if (_free[v] && d[v] > d[u] + g.adjCost(iv)) {
+                d[v] = d[u] + g.adjCost(iv);
+//                fout << "Updating d[" << v << "] = " << d[v] << endl;
+                trace[v] = u;
+                updateHeap(v);
+            }
+        }
+//        fout << endl;
+    } while (0 != nHeap);
+    printShortestPath();
+}
+
+void GraphAlgorithm::numberize() {
+    int deg[MAX] = {0, };
+    for (int u = 1; u <= g.n() - 1; ++u) {
+        for (int v = u + 1; v <= g.n(); ++v) {
+            if (g[u][v] < INFINITY) ++deg[v];
+            if (g[v][u] < INFINITY) ++deg[u];
+        }
+    }
+    count = 0;
+    for (int u = 1; u <= g.n(); ++u) {
+        if (0 == deg[u]) {
+            listTopo[++count] = u;
+        }
+    }
+    
+    int front = 1;
+    int u;
+    while (front <= count) {
+        u = listTopo[front++];
+        for (int v = 1; v <= g.n(); ++v) {
+            if (INFINITY != g[u][v]) {
+                --deg[v];
+                if (0 == deg[v]) {
+                    listTopo[++count] = v;
+                }
+            }
+        }
+    }
+}
+
+void GraphAlgorithm::topoOrdering() {
+    d[s] = 0;
+    
+    numberize();
+    for (int i = 1; i <= g.n() - 1; ++i) {
+        for (int j = i + 1; j <= g.n(); ++j) {
+            int u = listTopo[i];
+            int v = listTopo[j];
+//            fout << "i = " << i << " j = " << j << " u = " << u << " v = " << v << endl;
+            if (d[v] > d[u] + g[u][v]) {
+                d[v] = d[u] + g[u][v];
+                fout << "Optimize " << v << " from " << u << ". New d[" << v << "] = " << d[v] << endl;
+                trace[v] = u;
+            }
+        }
+    }
+    printShortestPath();
 }
 
 }

@@ -2,6 +2,6 @@
 
 using namespace graph;
 int main() {
-    Graph::mainGraph();
+    GraphAlgorithm::mainGraph();
     return 0;
 }

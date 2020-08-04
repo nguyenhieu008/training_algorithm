@@ -3,9 +3,9 @@
 
 using namespace std;
 namespace graph {
-static const int MAX = 5001;
-static const int MAX_EDGES = 10001;
-static const int INFINITY = 1000000000;
+static const int MAX = 501;
+static const int MAX_EDGES = 1001;
+static const int INFINITY = 100000000;
 static const int VIRTUAL_ROOT = -1;
 static const int NO_NODE = 0;
 enum GraphDirectivityType{
@@ -49,7 +49,6 @@ public:
     virtual ~Graph() {
     }
 
-    static void mainGraph();
     int& n() {
         return _n;
     }
@@ -148,6 +147,9 @@ public:
     void fordBellman();
     void dijkstra();
     void dijkstraHeap();
+    void topoOrdering();
+    
+    static void mainGraph();
 
 protected:
     int trace[MAX];
@@ -158,8 +160,9 @@ protected:
     int numbering[MAX], low[MAX], count, componentCount;
     long long d[MAX]; //shortest path
     int _heap[MAX]; // _heap[i] = u : index of node - g[u] - ordered by its d[u]
-    int _pos[MAX]; // _pos[v] = i - index of node v in heap - heap[pos[v]] = v
+    int _pos[MAX]; // _pos[v] = i - index of node v in heap - heap[pos[v]] = v - pos[_heap[v]] = v
     int nHeap; // size of _heap
+    int listTopo[MAX];
 
     void dfs(int u);
     int findNext(int u); //dfs
@@ -175,5 +178,7 @@ protected:
 
     void printShortestPath(); // Ford Bellman, Dijkstra
     void updateHeap(int v); // Dijkstra heap
+    int popHeap();
+    void numberize(); // Topo ordering
 };
 }

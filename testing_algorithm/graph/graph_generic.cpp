@@ -36,7 +36,7 @@ GraphAlgorithm::GraphAlgorithm(const string &inFile, const string &outFile, cons
 }
 void InputGraph::input(const bool &finding) {
     _isFindingPath = finding;
-    int m;
+    int m = 0;
 
     if (SINGLE == g.nType()) {
         int u, v, c;
@@ -81,9 +81,11 @@ void InputGraph::input(const bool &finding) {
     for (int i = 2; i <= g.n(); ++i) {
         g.header(i) += g.header(i-1);
     }
+    
     for (int i = 1; i <= g.n(); ++i) {
         for (int j = 1; j <= g.n(); ++j) {
-            if (g[i][j]) {
+            if (0 != g[i][j] && INFINITY != g[i][j]) {
+//                fout << "Reduce header i = " << i << " j = " << j << endl;
                 g.adj(g.header(i)) = j;
                 if (WEIGHT == g.wType()) g.adjCost(g.header(i)) = g[i][j];
                 --g.header(i);
@@ -91,6 +93,12 @@ void InputGraph::input(const bool &finding) {
         }
     }
     g.header(g.n()+1) = m;
+    
+//    fout << "Header: ";
+//    for (int i = 1; i <= g.n() + 1; ++i) {
+//        fout << g.header(i) << " ";
+//    }
+//    fout << endl;
 
     printGraph();
 }

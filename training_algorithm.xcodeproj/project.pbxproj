@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		781854A224D97DFB0032A825 /* graph_shortest_path.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 781854A124D97DFB0032A825 /* graph_shortest_path.cpp */; };
 		781F4782249F50ED005455E9 /* generate_binary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 781F477C249F5000005455E9 /* generate_binary.cpp */; };
 		7853CE0524A73B580056C58D /* sort_generic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7853CE0424A73B580056C58D /* sort_generic.cpp */; };
 		78607D5A24AF9BD800B608E5 /* sort_heap.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78607D5924AF9BD800B608E5 /* sort_heap.cpp */; };
@@ -23,7 +24,6 @@
 		7899BF8324D576EE007E2D87 /* graph_main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7899BF7F24D576EE007E2D87 /* graph_main.cpp */; };
 		7899BF8424D576EE007E2D87 /* graph_generic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7899BF8024D576EE007E2D87 /* graph_generic.cpp */; };
 		7899BF8524D576EE007E2D87 /* bfs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7899BF8124D576EE007E2D87 /* bfs.cpp */; };
-		7899BF8D24D57723007E2D87 /* test.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7899BF8A24D57723007E2D87 /* test.cpp */; };
 		7899BF8E24D57723007E2D87 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7899BF8C24D57723007E2D87 /* main.cpp */; };
 		78BF1A7624B4B80F00EEC457 /* list_arranges.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78BF1A6E24B4B80F00EEC457 /* list_arranges.cpp */; };
 		78BF1A7724B4B80F00EEC457 /* queens.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78BF1A6F24B4B80F00EEC457 /* queens.cpp */; };
@@ -48,11 +48,21 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		781854A124D97DFB0032A825 /* graph_shortest_path.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graph_shortest_path.cpp; sourceTree = "<group>"; };
+		781854A824D987130032A825 /* euler.inp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = euler.inp; sourceTree = "<group>"; };
+		781854A924D987130032A825 /* graph_connectivity_bridges.inp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph_connectivity_bridges.inp; sourceTree = "<group>"; };
+		781854AA24D987130032A825 /* graph_connectivity_cut_vertices.inp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph_connectivity_cut_vertices.inp; sourceTree = "<group>"; };
+		781854AB24D987130032A825 /* graph_connectivity_1.inp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph_connectivity_1.inp; sourceTree = "<group>"; };
+		781854AC24D987130032A825 /* input */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input; sourceTree = "<group>"; };
+		781854AD24D987130032A825 /* hamilton.inp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = hamilton.inp; sourceTree = "<group>"; };
+		781854AE24D987130032A825 /* graph_connectivity_tarjan.inp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph_connectivity_tarjan.inp; sourceTree = "<group>"; };
+		781854AF24D987130032A825 /* minpath.inp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = minpath.inp; sourceTree = "<group>"; };
+		781854B024D987130032A825 /* graph.inp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = graph.inp; sourceTree = "<group>"; };
+		781854B124D98CB80032A825 /* graph.out */ = {isa = PBXFileReference; lastKnownFileType = text; path = graph.out; sourceTree = "<group>"; };
 		781F4773249F4D66005455E9 /* generate_binary_string.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = generate_binary_string.cpp; sourceTree = "<group>"; };
 		781F4779249F5000005455E9 /* testing_algorithm */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = testing_algorithm; sourceTree = BUILT_PRODUCTS_DIR; };
 		781F477C249F5000005455E9 /* generate_binary.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = generate_binary.cpp; sourceTree = "<group>"; };
 		7853CE0424A73B580056C58D /* sort_generic.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sort_generic.cpp; sourceTree = "<group>"; };
-		7853CE0724A749E80056C58D /* sort_data.inp.2 */ = {isa = PBXFileReference; lastKnownFileType = text; path = sort_data.inp.2; sourceTree = "<group>"; };
 		785E023524B4BA29007593F9 /* sort_result.out.2 */ = {isa = PBXFileReference; lastKnownFileType = text; name = sort_result.out.2; path = testing_algorithm/sort_result.out.2; sourceTree = SOURCE_ROOT; };
 		78607D5924AF9BD800B608E5 /* sort_heap.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sort_heap.cpp; sourceTree = "<group>"; };
 		786BC2A524B4E8B20006AA46 /* sort_result.out.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; name = sort_result.out.1; path = testing_algorithm/sort_result.out.1; sourceTree = SOURCE_ROOT; };
@@ -60,19 +70,11 @@
 		78779ED524A7AB2C00335D14 /* sort_bubble.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sort_bubble.cpp; sourceTree = "<group>"; };
 		78779ED724A7AFB100335D14 /* sort_selection.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sort_selection.cpp; sourceTree = "<group>"; };
 		78779ED924A7B62A00335D14 /* gen_data.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gen_data.cpp; sourceTree = "<group>"; };
-		787AE79F24B387790061C8AA /* sort_data.inp.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = sort_data.inp.1; sourceTree = "<group>"; };
 		787B4BE224A90B6900D81A7C /* sort_insertion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sort_insertion.cpp; sourceTree = "<group>"; };
-		787E7F6B24D5B94300767832 /* graph_connectivity.out */ = {isa = PBXFileReference; lastKnownFileType = text; path = graph_connectivity.out; sourceTree = "<group>"; };
-		787E7F6C24D5B95900767832 /* graph_connectivity_1.inp */ = {isa = PBXFileReference; lastKnownFileType = text; path = graph_connectivity_1.inp; sourceTree = "<group>"; };
-		787E7F6D24D5B95900767832 /* graph_connectivity_bridges.inp */ = {isa = PBXFileReference; lastKnownFileType = text; path = graph_connectivity_bridges.inp; sourceTree = "<group>"; };
-		787E7F6E24D5B95900767832 /* graph_connectivity_tarjan.inp */ = {isa = PBXFileReference; lastKnownFileType = text; path = graph_connectivity_tarjan.inp; sourceTree = "<group>"; };
-		787E7F6F24D5B9C500767832 /* graph_connectivity_cut_vertices.inp */ = {isa = PBXFileReference; lastKnownFileType = text; path = graph_connectivity_cut_vertices.inp; sourceTree = "<group>"; };
-		787E7F7024D5BA3A00767832 /* graph_connectivity_cut_vertices.out */ = {isa = PBXFileReference; lastKnownFileType = text; path = graph_connectivity_cut_vertices.out; sourceTree = "<group>"; };
 		78827D9624B041100065701A /* sort_distribution_counting.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sort_distribution_counting.cpp; sourceTree = "<group>"; };
 		78827D9824B049060065701A /* sort_radix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sort_radix.cpp; sourceTree = "<group>"; };
 		7886010A24A10BB300CBC570 /* list_permutes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = list_permutes.cpp; sourceTree = "<group>"; };
 		78874FA624C7362F00234635 /* dfs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = dfs.cpp; sourceTree = "<group>"; };
-		78874FA824C73B9000234635 /* graph.inp */ = {isa = PBXFileReference; lastKnownFileType = text; path = graph.inp; sourceTree = "<group>"; };
 		78989D6424A7BAD300B97B81 /* sort_quick.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sort_quick.cpp; sourceTree = "<group>"; };
 		7899BF7D24D576EE007E2D87 /* graph_generic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graph_generic.h; sourceTree = "<group>"; };
 		7899BF7E24D576EE007E2D87 /* graph_connectivity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graph_connectivity.cpp; sourceTree = "<group>"; };
@@ -90,10 +92,7 @@
 		78BF1A7324B4B80F00EEC457 /* list_combinations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = list_combinations.cpp; sourceTree = "<group>"; };
 		78BF1A7424B4B80F00EEC457 /* sort_merge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sort_merge.cpp; sourceTree = "<group>"; };
 		78BF1A7524B4B80F00EEC457 /* analyse_int.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = analyse_int.cpp; sourceTree = "<group>"; };
-		78FA704724D6E3A500DBF87C /* graph.out */ = {isa = PBXFileReference; lastKnownFileType = text; path = graph.out; sourceTree = "<group>"; };
-		78FA704824D6EA2F00DBF87C /* euler.inp */ = {isa = PBXFileReference; lastKnownFileType = text; path = euler.inp; sourceTree = "<group>"; };
 		78FA704924D6EB2600DBF87C /* graph_circuit.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = graph_circuit.cpp; sourceTree = "<group>"; };
-		78FA704B24D6F23C00DBF87C /* euler.out */ = {isa = PBXFileReference; lastKnownFileType = text; path = euler.out; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +106,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		781854A724D987130032A825 /* data */ = {
+			isa = PBXGroup;
+			children = (
+				781854B124D98CB80032A825 /* graph.out */,
+				781854A824D987130032A825 /* euler.inp */,
+				781854A924D987130032A825 /* graph_connectivity_bridges.inp */,
+				781854AA24D987130032A825 /* graph_connectivity_cut_vertices.inp */,
+				781854AB24D987130032A825 /* graph_connectivity_1.inp */,
+				781854AC24D987130032A825 /* input */,
+				781854AD24D987130032A825 /* hamilton.inp */,
+				781854AE24D987130032A825 /* graph_connectivity_tarjan.inp */,
+				781854AF24D987130032A825 /* minpath.inp */,
+				781854B024D987130032A825 /* graph.inp */,
+			);
+			path = data;
+			sourceTree = "<group>";
+		};
 		781F476C249F4D24005455E9 = {
 			isa = PBXGroup;
 			children = (
@@ -127,20 +143,9 @@
 		781F477B249F5000005455E9 /* testing_algorithm */ = {
 			isa = PBXGroup;
 			children = (
+				781854A724D987130032A825 /* data */,
 				7899BF8C24D57723007E2D87 /* main.cpp */,
-				78874FA824C73B9000234635 /* graph.inp */,
-				78FA704724D6E3A500DBF87C /* graph.out */,
-				78FA704B24D6F23C00DBF87C /* euler.out */,
-				787E7F6B24D5B94300767832 /* graph_connectivity.out */,
-				787E7F6C24D5B95900767832 /* graph_connectivity_1.inp */,
-				787E7F6D24D5B95900767832 /* graph_connectivity_bridges.inp */,
-				787E7F6E24D5B95900767832 /* graph_connectivity_tarjan.inp */,
-				787E7F6F24D5B9C500767832 /* graph_connectivity_cut_vertices.inp */,
-				787E7F7024D5BA3A00767832 /* graph_connectivity_cut_vertices.out */,
-				78FA704824D6EA2F00DBF87C /* euler.inp */,
 				78874FA524C7357700234635 /* graph */,
-				787AE79F24B387790061C8AA /* sort_data.inp.1 */,
-				7853CE0724A749E80056C58D /* sort_data.inp.2 */,
 				78BF1A7E24B4B83C00EEC457 /* generation_backtracking_nhanhCan */,
 				78BF1A7D24B4B81700EEC457 /* sort */,
 			);
@@ -150,6 +155,7 @@
 		78874FA524C7357700234635 /* graph */ = {
 			isa = PBXGroup;
 			children = (
+				781854A124D97DFB0032A825 /* graph_shortest_path.cpp */,
 				7899BF8924D57723007E2D87 /* input */,
 				7899BF8A24D57723007E2D87 /* test.cpp */,
 				7899BF8124D576EE007E2D87 /* bfs.cpp */,
@@ -256,6 +262,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7899BF8424D576EE007E2D87 /* graph_generic.cpp in Sources */,
+				781854A224D97DFB0032A825 /* graph_shortest_path.cpp in Sources */,
 				78BF1A7B24B4B80F00EEC457 /* sort_merge.cpp in Sources */,
 				78FA704A24D6EB2600DBF87C /* graph_circuit.cpp in Sources */,
 				7899BF8E24D57723007E2D87 /* main.cpp in Sources */,
@@ -266,7 +273,6 @@
 				78827D9924B049060065701A /* sort_radix.cpp in Sources */,
 				78BF1A7824B4B80F00EEC457 /* abc_string.cpp in Sources */,
 				78607D5A24AF9BD800B608E5 /* sort_heap.cpp in Sources */,
-				7899BF8D24D57723007E2D87 /* test.cpp in Sources */,
 				78BF1A7624B4B80F00EEC457 /* list_arranges.cpp in Sources */,
 				78BF1A7924B4B80F00EEC457 /* travelingSalesman.cpp in Sources */,
 				7899BF8324D576EE007E2D87 /* graph_main.cpp in Sources */,
