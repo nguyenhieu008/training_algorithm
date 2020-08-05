@@ -21,6 +21,19 @@ enum GraphWeightType {
     WEIGHT
 };
 
+struct Edge {
+    Edge() {
+        u = v = c = 0;
+    }
+    Edge(int t_u, int t_v, int t_c) {
+        u = t_u;
+        v = t_v;
+        c = t_c;
+    }
+    int u, v, c;
+    bool mark = false;
+};
+
 class Util {
 public:
     static void push(int u);
@@ -32,7 +45,7 @@ public:
     static int popQueue();
     static bool queueEmpty();
     
-    inline int min(const int &x, const int &y) {
+    static inline int min(const int &x, const int &y) {
         return x < y? x : y;
     }
     
@@ -44,7 +57,7 @@ private:
 class Graph {
 public:
     Graph(const GraphDirectivityType &dType, const GraphNumerousType &nType, const GraphWeightType &wType) : 
-        a{{0, }, }, _dType(dType), _nType(nType), _wType(wType) {
+        a{{0, }, }, _dType(dType), _nType(nType), _wType(wType), _m(0) {
     }
     virtual ~Graph() {
     }
@@ -52,8 +65,14 @@ public:
     int& n() {
         return _n;
     }
+    int& m() {
+        return _m;
+    }
     void setN(int n) {
         _n = n;
+    }
+    Edge& e(const int &i) {
+        return _e[i];
     }
     
     int* operator[](const int &i) {
@@ -80,14 +99,16 @@ public:
     }
 
 private:
-    int _n;
+    int _n, _m;
     GraphDirectivityType _dType;
     GraphNumerousType _nType;
     GraphWeightType _wType;
     int a[MAX][MAX];
+    Edge _e[MAX_EDGES];
     int _adj[MAX_EDGES];
     long long _adjCost[MAX_EDGES];
     int _header[MAX+1];
+
 };
 
 
@@ -148,11 +169,17 @@ public:
     void dijkstra();
     void dijkstraHeap();
     void topoOrdering();
+    void floyd();
+
+    // Minimum spanning tree
+    void kruskal();
+    void prim();
     
     static void mainGraph();
 
 protected:
     int trace[MAX];
+    int traceFloyd[MAX][MAX]; // floyd algo. Next vertice on the path from u->v
     bool _free[MAX];
     bool _mark[MAX]; // cut vertices, mark node is cut vertices?
     int nC[MAX]; // cut vertices, num of children
@@ -162,7 +189,8 @@ protected:
     int _heap[MAX]; // _heap[i] = u : index of node - g[u] - ordered by its d[u]
     int _pos[MAX]; // _pos[v] = i - index of node v in heap - heap[pos[v]] = v - pos[_heap[v]] = v
     int nHeap; // size of _heap
-    int listTopo[MAX];
+    int listTopo[MAX]; // Topo ordering
+    int label[MAX]; // Kruskal. label[v] = u : u is parent of v in spanning tree
 
     void dfs(int u);
     int findNext(int u); //dfs
@@ -178,7 +206,14 @@ protected:
 
     void printShortestPath(); // Ford Bellman, Dijkstra
     void updateHeap(int v); // Dijkstra heap
-    int popHeap();
+    int popHeap(); // Dijkstra heap
     void numberize(); // Topo ordering
+    void printShortestPathFloyd(); // Floyd
+
+    int getRoot(int u); // Kruskal
+    int unionTree(int r1, int r2); // Kruskal
+    void adjustHeap(int r, int last); // Kruskal
+    void printSpanningTree(bool isConnected); // Kruskal
+    void printPrimResult(bool isConnected); // Prim
 };
 }

@@ -12,6 +12,8 @@
         "numeric": "cpp",
         "ratio": "cpp",
         "sstream": "cpp",
-        "streambuf": "cpp"
+        "streambuf": "cpp",
+        "string_view": "cpp",
+        "limits": "cpp"
     }
 }

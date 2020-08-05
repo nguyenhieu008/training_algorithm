@@ -31,32 +31,42 @@ GraphAlgorithm::GraphAlgorithm(const string &inFile, const string &outFile, cons
     for (int i = 1; i <= g.n(); ++i) {
         d[i] = INFINITY;
         _pos[i] = NO_NODE;
+        label[i] = -1; // negative number of node in tree root i
     }
-    nHeap = 0;  
+    nHeap = 0;
+    for (int i = 1; i <= g.n(); ++i) {
+        for (int j = 1; j <= g.n(); ++j) {
+            traceFloyd[i][j] = j;
+        }
+    }
 }
 void InputGraph::input(const bool &finding) {
     _isFindingPath = finding;
-    int m = 0;
 
     if (SINGLE == g.nType()) {
         int u, v, c;
-        fin >> m;
+        fin >> g.m();
         
         if (_isFindingPath) fin >> s >> f;
 
-        for (int i = 0 ; i < m; ++i) {
+        for (int i = 1; i <= g.m(); ++i) {
             fin >> u >> v;
-            ++g.header(u);
-            if (UNDIRECTED == g.dType()) ++g.header(v);
+            c = 1;
+
             if (WEIGHT == g.wType()) {
                 fin >> c;
                 g[u][v] = c;
-                if (UNDIRECTED == g.dType()) g[v][u] = c;
             }
-            else {
-                g[u][v] = true;
-                if (UNDIRECTED == g.dType()) g[v][u] = true;
-            }
+            
+            g[u][v] = c;
+            ++g.header(u);
+            if (UNDIRECTED == g.dType()) {
+                g[v][u] = c;    
+                ++g.header(v);
+            } 
+            
+            Edge e(u, v, c);
+            g.e(i) = e;
         }
     }
     else if (MULTIPLE == g.nType()) {
@@ -92,7 +102,7 @@ void InputGraph::input(const bool &finding) {
             }
         }
     }
-    g.header(g.n()+1) = m;
+    g.header(g.n()+1) = g.m();
     
 //    fout << "Header: ";
 //    for (int i = 1; i <= g.n() + 1; ++i) {

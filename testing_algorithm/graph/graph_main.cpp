@@ -4,9 +4,9 @@
 namespace graph {
 
 void GraphAlgorithm::mainGraph() {
-    GraphAlgorithm g("data/minpath.inp", "data/graph.out", DIRECTED, SINGLE, WEIGHT);
-    g.input(true);
-    g.topoOrdering();
+    GraphAlgorithm g("data/mintree.inp", "data/graph.out", UNDIRECTED, SINGLE, WEIGHT);
+    g.input();
+    g.prim();
 }
 }
     

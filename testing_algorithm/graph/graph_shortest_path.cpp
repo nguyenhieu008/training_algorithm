@@ -178,6 +178,15 @@ void GraphAlgorithm::numberize() {
 }
 
 void GraphAlgorithm::topoOrdering() {
+    fout << "Running topo ordering to find shortest path on non-circuit graph:" << endl;
+    if (!_isFindingPath) {
+        fout << "ERROR: Did not enable searching mode" << endl;
+        return;
+    }
+    if (UNDIRECTED == g.dType()) {
+        fout << "Cannot apply on undirected graph!" << endl;
+        return;
+    }
     d[s] = 0;
     
     numberize();
@@ -188,12 +197,51 @@ void GraphAlgorithm::topoOrdering() {
 //            fout << "i = " << i << " j = " << j << " u = " << u << " v = " << v << endl;
             if (d[v] > d[u] + g[u][v]) {
                 d[v] = d[u] + g[u][v];
-                fout << "Optimize " << v << " from " << u << ". New d[" << v << "] = " << d[v] << endl;
+                // fout << "Optimize " << v << " from " << u << ". New d[" << v << "] = " << d[v] << endl;
                 trace[v] = u;
             }
         }
     }
     printShortestPath();
+}
+
+void GraphAlgorithm::floyd() {
+    fout << "Running Floyd algorithm to find shortest path between any nodes:" << endl;
+    if (!_isFindingPath) {
+        fout << "ERROR: Did not enable searching mode" << endl;
+        return;
+    }
+    if (UNDIRECTED == g.dType()) {
+        fout << "Did not test correctiveness of this algo on undirected graph!" << endl;
+        return;
+    }
+
+    for (int k = 1; k <= g.n(); ++k) {
+        for (int u = 1; u <= g.n(); ++u) {
+            for (int v = 1; v <= g.n(); ++v) {
+                if (g[u][v] > g[u][k] + g[k][v]) {
+                    g[u][v] = g[u][k] + g[k][v];
+                    traceFloyd[u][v] = traceFloyd[u][k];
+                }
+            }
+        }
+    }
+
+    printShortestPathFloyd();
+}
+
+void GraphAlgorithm::printShortestPathFloyd() {
+    if (INFINITY == g[s][f]) {
+        fout << "Path from " << s << " to " << f << " not found!" << endl;
+    }
+    else {
+        fout << "Distance from " << s << " to " << f << ": " << g[s][f] << endl;
+        while (s != f) {
+            fout << s << "->";
+            s = traceFloyd[s][f];
+        }
+        fout << f << endl;
+    }
 }
 
 }
