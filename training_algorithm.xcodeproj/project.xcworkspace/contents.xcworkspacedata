@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../testing_algorithm/data">
-   </FileRef>
-   <FileRef
       location = "self:">
    </FileRef>
 </Workspace>

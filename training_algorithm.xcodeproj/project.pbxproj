@@ -18,6 +18,7 @@
 		78827D9724B041100065701A /* sort_distribution_counting.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78827D9624B041100065701A /* sort_distribution_counting.cpp */; };
 		78827D9924B049060065701A /* sort_radix.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78827D9824B049060065701A /* sort_radix.cpp */; };
 		7886010B24A10BB300CBC570 /* list_permutes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7886010A24A10BB300CBC570 /* list_permutes.cpp */; };
+		788654AC24DAE23E00C8310A /* graph_spanning_tree.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 788654AB24DAE23E00C8310A /* graph_spanning_tree.cpp */; };
 		78874FA724C7362F00234635 /* dfs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78874FA624C7362F00234635 /* dfs.cpp */; };
 		78989D6524A7BAD300B97B81 /* sort_quick.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78989D6424A7BAD300B97B81 /* sort_quick.cpp */; };
 		7899BF8224D576EE007E2D87 /* graph_connectivity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7899BF7E24D576EE007E2D87 /* graph_connectivity.cpp */; };
@@ -25,6 +26,7 @@
 		7899BF8424D576EE007E2D87 /* graph_generic.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7899BF8024D576EE007E2D87 /* graph_generic.cpp */; };
 		7899BF8524D576EE007E2D87 /* bfs.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7899BF8124D576EE007E2D87 /* bfs.cpp */; };
 		7899BF8E24D57723007E2D87 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 7899BF8C24D57723007E2D87 /* main.cpp */; };
+		78ACE27D24DFF353006DA769 /* graph_network_flow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78ACE27C24DFF353006DA769 /* graph_network_flow.cpp */; };
 		78BF1A7624B4B80F00EEC457 /* list_arranges.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78BF1A6E24B4B80F00EEC457 /* list_arranges.cpp */; };
 		78BF1A7724B4B80F00EEC457 /* queens.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78BF1A6F24B4B80F00EEC457 /* queens.cpp */; };
 		78BF1A7824B4B80F00EEC457 /* abc_string.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78BF1A7124B4B80F00EEC457 /* abc_string.cpp */; };
@@ -71,9 +73,11 @@
 		78779ED724A7AFB100335D14 /* sort_selection.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sort_selection.cpp; sourceTree = "<group>"; };
 		78779ED924A7B62A00335D14 /* gen_data.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = gen_data.cpp; sourceTree = "<group>"; };
 		787B4BE224A90B6900D81A7C /* sort_insertion.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sort_insertion.cpp; sourceTree = "<group>"; };
+		787E6FFA24E0268000181EB0 /* flow.inp */ = {isa = PBXFileReference; lastKnownFileType = text; path = flow.inp; sourceTree = "<group>"; };
 		78827D9624B041100065701A /* sort_distribution_counting.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sort_distribution_counting.cpp; sourceTree = "<group>"; };
 		78827D9824B049060065701A /* sort_radix.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sort_radix.cpp; sourceTree = "<group>"; };
 		7886010A24A10BB300CBC570 /* list_permutes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = list_permutes.cpp; sourceTree = "<group>"; };
+		788654AB24DAE23E00C8310A /* graph_spanning_tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graph_spanning_tree.cpp; sourceTree = "<group>"; };
 		78874FA624C7362F00234635 /* dfs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = dfs.cpp; sourceTree = "<group>"; };
 		78989D6424A7BAD300B97B81 /* sort_quick.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sort_quick.cpp; sourceTree = "<group>"; };
 		7899BF7D24D576EE007E2D87 /* graph_generic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graph_generic.h; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 		7899BF8924D57723007E2D87 /* input */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = input; path = testing_algorithm/input; sourceTree = SOURCE_ROOT; };
 		7899BF8A24D57723007E2D87 /* test.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = test.cpp; path = testing_algorithm/test.cpp; sourceTree = SOURCE_ROOT; };
 		7899BF8C24D57723007E2D87 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = testing_algorithm/main.cpp; sourceTree = SOURCE_ROOT; };
+		78ACE27C24DFF353006DA769 /* graph_network_flow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = graph_network_flow.cpp; sourceTree = "<group>"; };
 		78BF1A6E24B4B80F00EEC457 /* list_arranges.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = list_arranges.cpp; sourceTree = "<group>"; };
 		78BF1A6F24B4B80F00EEC457 /* queens.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = queens.cpp; sourceTree = "<group>"; };
 		78BF1A7024B4B80F00EEC457 /* travelingSalesman.inp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = travelingSalesman.inp; sourceTree = "<group>"; };
@@ -111,6 +116,7 @@
 			children = (
 				781854B124D98CB80032A825 /* graph.out */,
 				781854A824D987130032A825 /* euler.inp */,
+				787E6FFA24E0268000181EB0 /* flow.inp */,
 				781854A924D987130032A825 /* graph_connectivity_bridges.inp */,
 				781854AA24D987130032A825 /* graph_connectivity_cut_vertices.inp */,
 				781854AB24D987130032A825 /* graph_connectivity_1.inp */,
@@ -156,6 +162,7 @@
 			isa = PBXGroup;
 			children = (
 				781854A124D97DFB0032A825 /* graph_shortest_path.cpp */,
+				78ACE27C24DFF353006DA769 /* graph_network_flow.cpp */,
 				7899BF8924D57723007E2D87 /* input */,
 				7899BF8A24D57723007E2D87 /* test.cpp */,
 				7899BF8124D576EE007E2D87 /* bfs.cpp */,
@@ -163,6 +170,7 @@
 				78FA704924D6EB2600DBF87C /* graph_circuit.cpp */,
 				7899BF8024D576EE007E2D87 /* graph_generic.cpp */,
 				7899BF7D24D576EE007E2D87 /* graph_generic.h */,
+				788654AB24DAE23E00C8310A /* graph_spanning_tree.cpp */,
 				7899BF7F24D576EE007E2D87 /* graph_main.cpp */,
 				78874FA624C7362F00234635 /* dfs.cpp */,
 			);
@@ -282,10 +290,12 @@
 				78779EDA24A7B62A00335D14 /* gen_data.cpp in Sources */,
 				78827D9724B041100065701A /* sort_distribution_counting.cpp in Sources */,
 				78BF1A7C24B4B80F00EEC457 /* analyse_int.cpp in Sources */,
+				78ACE27D24DFF353006DA769 /* graph_network_flow.cpp in Sources */,
 				7899BF8524D576EE007E2D87 /* bfs.cpp in Sources */,
 				787B4BE324A90B6900D81A7C /* sort_insertion.cpp in Sources */,
 				78989D6524A7BAD300B97B81 /* sort_quick.cpp in Sources */,
 				78BF1A7724B4B80F00EEC457 /* queens.cpp in Sources */,
+				788654AC24DAE23E00C8310A /* graph_spanning_tree.cpp in Sources */,
 				78779ED824A7AFB100335D14 /* sort_selection.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

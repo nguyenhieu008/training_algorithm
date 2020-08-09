@@ -44,6 +44,7 @@ public:
     static void pushQueue(int u);
     static int popQueue();
     static bool queueEmpty();
+    static void resetQueue();
     
     static inline int min(const int &x, const int &y) {
         return x < y? x : y;
@@ -120,7 +121,7 @@ public:
         fout.close();
     }
 
-    void input(const bool &finding = false);
+    void input(const bool &finding = false, const bool &network = false);
     void printGraph();
     
 protected:
@@ -128,7 +129,9 @@ protected:
     ofstream fout;
     Graph g;
     bool _isFindingPath;
+    bool _isNetworking;
     int s, f;
+    int a, b; // source, sink of network
 };
 
 class GraphAlgorithm : public InputGraph {
@@ -175,6 +178,9 @@ public:
     void kruskal();
     void prim();
     
+    // Max flow on network
+    void maxFlow();
+    
     static void mainGraph();
 
 protected:
@@ -191,6 +197,8 @@ protected:
     int nHeap; // size of _heap
     int listTopo[MAX]; // Topo ordering
     int label[MAX]; // Kruskal. label[v] = u : u is parent of v in spanning tree
+    int _f[MAX][MAX]; // flow of network
+    int _gf[MAX][MAX]; // flow increment graph
 
     void dfs(int u);
     int findNext(int u); //dfs
@@ -215,5 +223,10 @@ protected:
     void adjustHeap(int r, int last); // Kruskal
     void printSpanningTree(bool isConnected); // Kruskal
     void printPrimResult(bool isConnected); // Prim
+    
+    void createGf();
+    bool findNetworkPath();
+    void increaseFlow();
+    void printMaxFlow();
 };
 }

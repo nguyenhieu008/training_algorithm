@@ -40,14 +40,27 @@ GraphAlgorithm::GraphAlgorithm(const string &inFile, const string &outFile, cons
         }
     }
 }
-void InputGraph::input(const bool &finding) {
+void InputGraph::input(const bool &finding, const bool &network) {
+    if (finding && network) {
+        fout << "ERROR: Do not support searching path along with finding max flow of network!" << endl;
+        exit(5);
+    }
     _isFindingPath = finding;
+    _isNetworking = network;
 
     if (SINGLE == g.nType()) {
         int u, v, c;
         fin >> g.m();
         
         if (_isFindingPath) fin >> s >> f;
+        else if (_isNetworking) {
+            fin >> a >> b;
+            for (int ii = 1; ii <= g.n(); ++ii) {
+                for (int jj = 1; jj <= g.n(); ++jj) {
+                    g[ii][jj] = 0;
+                }
+            }
+        }
 
         for (int i = 1; i <= g.m(); ++i) {
             fin >> u >> v;
@@ -135,7 +148,7 @@ void InputGraph::printGraph() {
     fout << "Printing " << (UNDIRECTED == g.dType()? "Undirected, " : "Directed, ") << (SINGLE == g.nType()? "Single, " : "Multiple, ") << (UNWEIGHT == g.wType()? "Unweighted " : " Weighted ") <<  "graph: " << endl;
     for (int i = 1; i <= g.n(); ++i) {
         for (int j = 1; j <= g.n(); ++j) {
-            fout << g[i][j];
+            fout << g[i][j] << "\t";
         }
         fout << endl;
     }
@@ -191,6 +204,11 @@ int Util::popQueue() {
 
 bool Util::queueEmpty() {
     return _first >= _last;
+}
+
+void Util::resetQueue() {
+    Util::_first = 0;
+    Util::_last = 0;
 }
 
 }
