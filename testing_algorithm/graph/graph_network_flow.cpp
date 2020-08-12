@@ -131,20 +131,20 @@ bool GraphAlgorithm::findFordFulkersonPath() {
     while (!Util::queueEmpty()) {
         u = Util::popQueue();
         for (v = 1; v <= g.n(); ++v) {
-            if (NO_NODE == trace[v] && g[u][v]) {
+            if (NO_NODE == trace[v]) {
                 if (_f[u][v] < g[u][v]) {
                     trace[v] = u;
-                    delta[v] = Util::min(delta[v], g[u][v] - _f[u][v]);
+                    delta[v] = Util::min(delta[u], g[u][v] - _f[u][v]);
                 }
                 else if (_f[v][u] > 0) {
                     trace[v] = -u;
-                    delta[v] = Util::min(delta[v], _f[v][u]);
+                    delta[v] = Util::min(delta[u], _f[v][u]);
                 }
 
-                if (b == v) {
-                    return true;
-                }
                 if (NO_NODE != trace[v]) {
+                    if (b == v) {
+                        return true;
+                    }
                     Util::pushQueue(v);
                 }
             }
@@ -157,6 +157,7 @@ void GraphAlgorithm::increaseFlowFordFulkerson() {
     int u;
     for (int v = b; v != a; v = u) {
         u = trace[v];
+        fout << "u = " << u << endl;
         if (u > 0) {
             _f[u][v] += delta[b];
         }
@@ -168,7 +169,7 @@ void GraphAlgorithm::increaseFlowFordFulkerson() {
 }
 
 void GraphAlgorithm::fordFulkerson() {
-    fout << "Running max flow algorithm: " << endl;
+    fout << "Running ford fulkerson algorithm: " << endl;
     if (!_isNetworking) {
         fout << "Graph is not a network!" << endl;
         return;
@@ -179,8 +180,11 @@ void GraphAlgorithm::fordFulkerson() {
     }
     do {
         if (!findFordFulkersonPath()) break;
+        fout << "ccc" << endl;
         increaseFlowFordFulkerson();
+        fout << "aaa" << endl;
     } while(true);
+    fout << "bbb" << endl;
     printMaxFlow();
 }
 }
