@@ -109,16 +109,78 @@ void GraphAlgorithm::maxFlow() {
         return;
     }
     
-    for (int i = 1; i <= g.n(); ++i) {
-        for (int j = 1; j <= g.n(); ++j) {
-            _f[i][j] = 0;
-        }
-    }
     do {
         createGf();
         if (!findNetworkPath()) break;
         increaseFlow();
     } while (true);
+    printMaxFlow();
+}
+
+bool GraphAlgorithm::findFordFulkersonPath() {
+    Util::resetQueue();
+    for (int i = 1; i <= g.n(); ++i) {
+        trace[i] = NO_NODE;
+        delta[i] = INFINITY;
+    }
+
+    int u, v;
+    Util::pushQueue(a);
+    trace[a] = VIRTUAL_ROOT;
+
+    while (!Util::queueEmpty()) {
+        u = Util::popQueue();
+        for (v = 1; v <= g.n(); ++v) {
+            if (NO_NODE == trace[v] && g[u][v]) {
+                if (_f[u][v] < g[u][v]) {
+                    trace[v] = u;
+                    delta[v] = Util::min(delta[v], g[u][v] - _f[u][v]);
+                }
+                else if (_f[v][u] > 0) {
+                    trace[v] = -u;
+                    delta[v] = Util::min(delta[v], _f[v][u]);
+                }
+
+                if (b == v) {
+                    return true;
+                }
+                if (NO_NODE != trace[v]) {
+                    Util::pushQueue(v);
+                }
+            }
+        }
+    }
+    return false;
+}
+
+void GraphAlgorithm::increaseFlowFordFulkerson() {
+    int u;
+    for (int v = b; v != a; v = u) {
+        u = trace[v];
+        if (u > 0) {
+            _f[u][v] += delta[b];
+        }
+        else {
+            u = -u;
+            _f[v][u] -= delta[b];
+        }
+    }
+}
+
+void GraphAlgorithm::fordFulkerson() {
+    fout << "Running max flow algorithm: " << endl;
+    if (!_isNetworking) {
+        fout << "Graph is not a network!" << endl;
+        return;
+    }
+    if (WEIGHT != g.wType() || DIRECTED != g.dType()) {
+        fout << "This type of graph not supported!" << endl;
+        return;
+    }
+    do {
+        if (!findFordFulkersonPath()) break;
+        increaseFlowFordFulkerson();
+    } while(true);
     printMaxFlow();
 }
 }

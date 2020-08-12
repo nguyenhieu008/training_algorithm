@@ -199,6 +199,7 @@ protected:
     int label[MAX]; // Kruskal. label[v] = u : u is parent of v in spanning tree
     int _f[MAX][MAX]; // flow of network
     int _gf[MAX][MAX]; // flow increment graph
+    int delta[MAX];
 
     void dfs(int u);
     int findNext(int u); //dfs
@@ -228,5 +229,9 @@ protected:
     bool findNetworkPath();
     void increaseFlow();
     void printMaxFlow();
+    bool findFordFulkersonPath();
+    void increaseFlowFordFulkerson();
+    void fordFulkerson();
+    void printFordFulkersonFlow();
 };
 }
