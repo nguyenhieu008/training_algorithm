@@ -4,9 +4,8 @@
 namespace graph {
 
 void GraphAlgorithm::mainGraph() {
-    GraphAlgorithm g("data/flow.inp", "data/graph.out", DIRECTED, SINGLE, WEIGHT);
-    g.input(false, true);
-    g.fordFulkerson();
+    GraphAlgorithm g("data/match.inp", "data/graph.out", BIPARTITE, DIRECTED, SINGLE, WEIGHT);
+    g.input();
 }
 }
     

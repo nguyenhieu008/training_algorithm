@@ -8,6 +8,10 @@ static const int MAX_EDGES = 1001;
 static const int INFINITY = 100000000;
 static const int VIRTUAL_ROOT = -1;
 static const int NO_NODE = 0;
+enum GraphPartitionType {
+    NORMAL,
+    BIPARTITE
+};
 enum GraphDirectivityType{
     UNDIRECTED,
     DIRECTED
@@ -112,10 +116,28 @@ private:
 
 };
 
+class BipartiteGraph {
+public:
+    BipartiteGraph() : a{{false, }, } {
+
+    }
+    int& m() {
+        return _m;
+    }
+    int& n() {
+        return _n;
+    }
+    bool* operator[](const int &i) {
+        return a[i];
+    }
+private:
+    int _m, _n;
+    bool a[MAX][MAX];
+};
 
 class InputGraph {
 public:
-    InputGraph(const string &inFile, const string &outFile, const GraphDirectivityType &dType, const GraphNumerousType &nType, const GraphWeightType &wType);
+    InputGraph(const string &inFile, const string &outFile, const GraphPartitionType &bType, const GraphDirectivityType &dType, const GraphNumerousType &nType, const GraphWeightType &wType);
     ~InputGraph() {
         fin.close();
         fout.close();
@@ -128,6 +150,8 @@ protected:
     ifstream fin;
     ofstream fout;
     Graph g;
+    BipartiteGraph bg;
+    GraphPartitionType _bType;
     bool _isFindingPath;
     bool _isNetworking;
     int s, f;
@@ -136,7 +160,7 @@ protected:
 
 class GraphAlgorithm : public InputGraph {
 public:
-    GraphAlgorithm(const string &inFile = "graph.inp", const string &outFile = "graph.out", const GraphDirectivityType &type = UNDIRECTED, const GraphNumerousType &nType = SINGLE, const GraphWeightType &wType = UNWEIGHT);
+    GraphAlgorithm(const string &inFile = "graph.inp", const string &outFile = "graph.out", const GraphPartitionType &bType = NORMAL, const GraphDirectivityType &type = UNDIRECTED, const GraphNumerousType &nType = SINGLE, const GraphWeightType &wType = UNWEIGHT);
     virtual ~GraphAlgorithm(){    
     }
 
@@ -180,12 +204,15 @@ public:
     
     // Max flow on network
     void maxFlow();
+
+    // Augmenting path algorithm on bipartite graph
+    void augmentingPath();
     
     static void mainGraph();
 
-protected:
+private:
     int trace[MAX];
-    int traceFloyd[MAX][MAX]; // floyd algo. Next vertice on the path from u->v
+    int **traceFloyd; // floyd algo. Next vertice on the path from u->v
     bool _free[MAX];
     bool _mark[MAX]; // cut vertices, mark node is cut vertices?
     int nC[MAX]; // cut vertices, num of children
@@ -197,9 +224,10 @@ protected:
     int nHeap; // size of _heap
     int listTopo[MAX]; // Topo ordering
     int label[MAX]; // Kruskal. label[v] = u : u is parent of v in spanning tree
-    int _f[MAX][MAX]; // flow of network
-    int _gf[MAX][MAX]; // flow increment graph
-    int delta[MAX];
+    int **_f; // flow of network
+    int **_gf; // flow increment graph
+    int delta[MAX]; // ford-fulkerson
+    int matchX[MAX], matchY[MAX]; // Augmenting path algorithm
 
     void dfs(int u);
     int findNext(int u); //dfs
@@ -233,5 +261,8 @@ protected:
     void increaseFlowFordFulkerson();
     void fordFulkerson();
     void printFordFulkersonFlow();
+
+    int findAugmentingPath();   //augmenting path algorithm
+    void enlarge(const int &f); //augmenting path algorithm
 };
 }
