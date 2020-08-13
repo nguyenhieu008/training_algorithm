@@ -3,15 +3,15 @@
 
 namespace graph {
 
-InputGraph::InputGraph(const string &inFile, const string &outFile, const GraphPartitionType &bType, const GraphDirectivityType &dType, const GraphNumerousType &nType, const GraphWeightType &wType) : 
+InputGraph::InputGraph(const string &inFile, const string &outFile, const GraphPartitionType &pType, const GraphDirectivityType &dType, const GraphNumerousType &nType, const GraphWeightType &wType) :
     fin(inFile), fout(outFile), g(dType, nType, wType), _isFindingPath(false) {
     if (MULTIPLE == g.nType() && WEIGHT == g.wType()) {
         fout << "ERROR: Dont support weighted multiple graph!";
         exit(1);
         return;
     }
-    _bType = bType;
-    if (NORMAL == bType) {
+    _pType = pType;
+    if (NORMAL == _pType) {
         fin >> g.n();
         if (WEIGHT == g.wType()) {
             for (int i = 1; i <= g.n(); ++i) {
@@ -34,7 +34,7 @@ GraphAlgorithm::GraphAlgorithm(const string &inFile, const string &outFile, cons
     InputGraph(inFile, outFile, bType, dType, nType, wType), trace{NO_NODE, }, numbering{0, }, count(0), componentCount(1), nC{0, }, _mark{false, }, x{NO_NODE, } {
     memset(_free, true, sizeof(_free));
 
-    if (NORMAL == _bType) {
+    if (NORMAL == _pType) {
         _f = new int*[MAX];
         _gf = new int*[MAX];
         traceFloyd = new int*[MAX];
@@ -64,7 +64,7 @@ GraphAlgorithm::GraphAlgorithm(const string &inFile, const string &outFile, cons
 }
 
 void InputGraph::input(const bool &finding, const bool &network) {
-    if (NORMAL == _bType) {
+    if (NORMAL == _pType) {
         if (finding && network) {
             fout << "ERROR: Do not support searching path along with finding max flow of network!" << endl;
             exit(5);
@@ -171,7 +171,7 @@ void GraphAlgorithm::printPath() {
 
 
 void InputGraph::printGraph() {
-    if (NORMAL == _bType) {
+    if (NORMAL == _pType) {
         fout << "Printing Normal, " << (UNDIRECTED == g.dType()? "Undirected, " : "Directed, ") << (SINGLE == g.nType()? "Single, " : "Multiple, ") << (UNWEIGHT == g.wType()? "Unweighted " : " Weighted ") <<  "graph: " << endl;
         for (int i = 1; i <= g.n(); ++i) {
             for (int j = 1; j <= g.n(); ++j) {

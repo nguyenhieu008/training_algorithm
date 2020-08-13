@@ -34,6 +34,7 @@
 		78BF1A7A24B4B80F00EEC457 /* list_combinations.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78BF1A7324B4B80F00EEC457 /* list_combinations.cpp */; };
 		78BF1A7B24B4B80F00EEC457 /* sort_merge.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78BF1A7424B4B80F00EEC457 /* sort_merge.cpp */; };
 		78BF1A7C24B4B80F00EEC457 /* analyse_int.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78BF1A7524B4B80F00EEC457 /* analyse_int.cpp */; };
+		78F4B00924E56CB90072B53D /* graph_bipartite.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78F4B00824E56CB90072B53D /* graph_bipartite.cpp */; };
 		78FA704A24D6EB2600DBF87C /* graph_circuit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 78FA704924D6EB2600DBF87C /* graph_circuit.cpp */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +98,9 @@
 		78BF1A7324B4B80F00EEC457 /* list_combinations.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = list_combinations.cpp; sourceTree = "<group>"; };
 		78BF1A7424B4B80F00EEC457 /* sort_merge.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = sort_merge.cpp; sourceTree = "<group>"; };
 		78BF1A7524B4B80F00EEC457 /* analyse_int.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = analyse_int.cpp; sourceTree = "<group>"; };
+		78F4B00824E56CB90072B53D /* graph_bipartite.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graph_bipartite.cpp; sourceTree = "<group>"; };
+		78F4B00A24E56CEB0072B53D /* mintree.inp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mintree.inp; sourceTree = "<group>"; };
+		78F4B00B24E56CEB0072B53D /* match.inp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = match.inp; sourceTree = "<group>"; };
 		78FA704924D6EB2600DBF87C /* graph_circuit.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = graph_circuit.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,6 +125,8 @@
 				781854AA24D987130032A825 /* graph_connectivity_cut_vertices.inp */,
 				781854AB24D987130032A825 /* graph_connectivity_1.inp */,
 				781854AC24D987130032A825 /* input */,
+				78F4B00B24E56CEB0072B53D /* match.inp */,
+				78F4B00A24E56CEB0072B53D /* mintree.inp */,
 				781854AD24D987130032A825 /* hamilton.inp */,
 				781854AE24D987130032A825 /* graph_connectivity_tarjan.inp */,
 				781854AF24D987130032A825 /* minpath.inp */,
@@ -167,6 +173,7 @@
 				7899BF8A24D57723007E2D87 /* test.cpp */,
 				7899BF8124D576EE007E2D87 /* bfs.cpp */,
 				7899BF7E24D576EE007E2D87 /* graph_connectivity.cpp */,
+				78F4B00824E56CB90072B53D /* graph_bipartite.cpp */,
 				78FA704924D6EB2600DBF87C /* graph_circuit.cpp */,
 				7899BF8024D576EE007E2D87 /* graph_generic.cpp */,
 				7899BF7D24D576EE007E2D87 /* graph_generic.h */,
@@ -297,6 +304,7 @@
 				78BF1A7724B4B80F00EEC457 /* queens.cpp in Sources */,
 				788654AC24DAE23E00C8310A /* graph_spanning_tree.cpp in Sources */,
 				78779ED824A7AFB100335D14 /* sort_selection.cpp in Sources */,
+				78F4B00924E56CB90072B53D /* graph_bipartite.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

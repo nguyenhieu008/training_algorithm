@@ -151,7 +151,7 @@ protected:
     ofstream fout;
     Graph g;
     BipartiteGraph bg;
-    GraphPartitionType _bType;
+    GraphPartitionType _pType;
     bool _isFindingPath;
     bool _isNetworking;
     int s, f;
@@ -263,6 +263,7 @@ private:
     void printFordFulkersonFlow();
 
     int findAugmentingPath();   //augmenting path algorithm
-    void enlarge(const int &f); //augmenting path algorithm
+    void enlarge(int f); //augmenting path algorithm
+    void printMaximumMatching(); //augmenting path algorithm
 };
 }
