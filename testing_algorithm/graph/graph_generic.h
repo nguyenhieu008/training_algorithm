@@ -5,7 +5,7 @@ using namespace std;
 namespace graph {
 static const int MAX = 501;
 static const int MAX_EDGES = 1001;
-static const int INFINITY = 100000000;
+static const int INFINITY = 100000;
 static const int VIRTUAL_ROOT = -1;
 static const int NO_NODE = 0;
 enum GraphPartitionType {
@@ -118,7 +118,7 @@ private:
 
 class BipartiteGraph {
 public:
-    BipartiteGraph() : a{{false, }, } {
+    BipartiteGraph(const GraphWeightType &wType) : a{{false, }, }, _wType(wType) {
 
     }
     int& m() {
@@ -127,12 +127,18 @@ public:
     int& n() {
         return _n;
     }
-    bool* operator[](const int &i) {
+    int* operator[](const int &i) {
         return a[i];
+    }
+    
+    GraphWeightType wType() const{
+        return _wType;
     }
 private:
     int _m, _n;
-    bool a[MAX][MAX];
+    int a[MAX][MAX];
+//    GraphNumerousType _nType;
+    GraphWeightType _wType;
 };
 
 class InputGraph {

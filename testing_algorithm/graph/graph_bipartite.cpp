@@ -57,7 +57,7 @@ void GraphAlgorithm::augmentingPath() {
         fout << "ERROR: This algorithm runs on bipartite graph only!" << endl;
         return;
     }
-    int count = 1;
+//    int count = 1;
     int finish = 0;
     do {
         finish = findAugmentingPath();

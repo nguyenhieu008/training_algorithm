@@ -4,7 +4,7 @@
 namespace graph {
 
 InputGraph::InputGraph(const string &inFile, const string &outFile, const GraphPartitionType &pType, const GraphDirectivityType &dType, const GraphNumerousType &nType, const GraphWeightType &wType) :
-    fin(inFile), fout(outFile), g(dType, nType, wType), _isFindingPath(false) {
+    fin(inFile), fout(outFile), g(dType, nType, wType), bg(wType), _isFindingPath(false) {
     if (MULTIPLE == g.nType() && WEIGHT == g.wType()) {
         fout << "ERROR: Dont support weighted multiple graph!";
         exit(1);
@@ -92,7 +92,6 @@ void InputGraph::input(const bool &finding, const bool &network) {
 
                 if (WEIGHT == g.wType()) {
                     fin >> c;
-                    g[u][v] = c;
                 }
                 
                 g[u][v] = c;
@@ -142,10 +141,12 @@ void InputGraph::input(const bool &finding, const bool &network) {
         g.header(g.n()+1) = g.m();
     }
     else {
-        int u = 0, v = 0;
+        int u = 0, v = 0, c;
         while (fin >> u) {
             fin >> v;
-            bg[u][v] = true;
+            c = 1;
+            if (WEIGHT == bg.wType()) fin >> c;
+            bg[u][v] = c;
         }
     }
 
