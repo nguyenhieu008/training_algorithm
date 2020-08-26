@@ -5,7 +5,8 @@ using namespace std;
 namespace graph {
 static const int MAX = 501;
 static const int MAX_EDGES = 1001;
-static const int INFINITY = 100000;
+static const int INFINITY = 501;
+static const int INF = INFINITY;
 static const int VIRTUAL_ROOT = -1;
 static const int NO_NODE = 0;
 enum GraphPartitionType {
@@ -162,6 +163,7 @@ protected:
     bool _isNetworking;
     int s, f;
     int a, b; // source, sink of network
+    int k; // Bipartite graph. Max of m, n. Hungari
 };
 
 class GraphAlgorithm : public InputGraph {
@@ -234,6 +236,7 @@ private:
     int **_gf; // flow increment graph
     int delta[MAX]; // ford-fulkerson
     int matchX[MAX], matchY[MAX]; // Augmenting path algorithm
+    int fx[MAX], fy[MAX]; // Hungari
 
     void dfs(int u);
     int findNext(int u); //dfs
@@ -269,7 +272,15 @@ private:
     void printFordFulkersonFlow();
 
     int findAugmentingPath();   //augmenting path algorithm
-    void enlarge(int f); //augmenting path algorithm
+    void enlarge(int f); //augmenting path algorithm, Hungari
     void printMaximumMatching(); //augmenting path algorithm
+    
+    void initHungary(); // Hungari
+    int getC(int i, int j); // Hungari
+    int findAugmentingPath(int s); // Hungari
+    void subX_addY(int s); // Hungari
+    void printHungariGraph();
+    void printHungariResult();
+    void hungari();
 };
 }

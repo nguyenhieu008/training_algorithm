@@ -4,13 +4,13 @@
 namespace graph {
 
 InputGraph::InputGraph(const string &inFile, const string &outFile, const GraphPartitionType &pType, const GraphDirectivityType &dType, const GraphNumerousType &nType, const GraphWeightType &wType) :
-    fin(inFile), fout(outFile), g(dType, nType, wType), bg(wType), _isFindingPath(false) {
+    fin(inFile), fout(outFile), g(dType, nType, wType), bg(wType), _isFindingPath(false), _pType(pType) {
     if (MULTIPLE == g.nType() && WEIGHT == g.wType()) {
         fout << "ERROR: Dont support weighted multiple graph!";
         exit(1);
         return;
     }
-    _pType = pType;
+
     if (NORMAL == _pType) {
         fin >> g.n();
         if (WEIGHT == g.wType()) {
@@ -27,11 +27,17 @@ InputGraph::InputGraph(const string &inFile, const string &outFile, const GraphP
     }
     else {
         fin >> bg.m() >> bg.n();
+        k = bg.m() > bg.n() ? bg.m() : bg.n();
+        for (int i = 1; i <= k; ++i) {
+            for (int j = 1; j <= k; ++j) {
+                bg[i][j] = INFINITY;
+            }
+        }
     }
 }
 
-GraphAlgorithm::GraphAlgorithm(const string &inFile, const string &outFile, const GraphPartitionType &bType, const GraphDirectivityType &dType, const GraphNumerousType &nType, const GraphWeightType &wType) : 
-    InputGraph(inFile, outFile, bType, dType, nType, wType), trace{NO_NODE, }, numbering{0, }, count(0), componentCount(1), nC{0, }, _mark{false, }, x{NO_NODE, } {
+GraphAlgorithm::GraphAlgorithm(const string &inFile, const string &outFile, const GraphPartitionType &pType, const GraphDirectivityType &dType, const GraphNumerousType &nType, const GraphWeightType &wType) :
+    InputGraph(inFile, outFile, pType, dType, nType, wType), trace{NO_NODE, }, numbering{0, }, count(0), componentCount(1), nC{0, }, _mark{false, }, x{NO_NODE, } {
     memset(_free, true, sizeof(_free));
 
     if (NORMAL == _pType) {
@@ -58,8 +64,8 @@ GraphAlgorithm::GraphAlgorithm(const string &inFile, const string &outFile, cons
         }
     }    
     else {
-        for (int i = 1; i <= bg.m(); ++i) matchX[i] = NO_NODE;
-        for (int i = 1; i <= bg.n(); ++i) matchY[i] = NO_NODE;
+        for (int i = 1; i <= MAX; ++i) matchX[i] = NO_NODE;
+        for (int i = 1; i <= MAX; ++i) matchY[i] = NO_NODE;
     }
 }
 
