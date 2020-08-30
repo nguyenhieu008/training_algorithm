@@ -237,6 +237,9 @@ private:
     int delta[MAX]; // ford-fulkerson
     int matchX[MAX], matchY[MAX]; // Augmenting path algorithm
     int fx[MAX], fy[MAX]; // Hungari
+    int dy[MAX]; // distance from y to augmenting tree
+    int arg[MAX]; // vertice X corresponds to dy
+    
 
     void dfs(int u);
     int findNext(int u); //dfs
@@ -282,5 +285,9 @@ private:
     void printHungariGraph();
     void printHungariResult();
     void hungari();
+    void initBfs(int s); // Hungari improved
+    int findAugementingPathImproved(int s); // Hungari improved
+    int subX_addY_improved(int s); // Hungari improved
+    void hungariImproved();
 };
 }

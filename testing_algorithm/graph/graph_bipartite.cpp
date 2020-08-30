@@ -210,4 +210,109 @@ void GraphAlgorithm::hungari() {
     }
     printHungariResult();
 }
+
+void GraphAlgorithm::initBfs(int s) {
+    Util::resetQueue();
+    Util::pushQueue(s);
+    for (int i = 1; i <= k; ++i) trace[i] = 0;
+    
+    for (int j = 1; j <= k; ++j) {
+        dy[j] = getC(s, j);
+        arg[j] = s;
+        fout << "Initial dy[" << j << "] = " << dy[j] << " arg[" << j << "] = " << arg[j] << endl;
+    }
+}
+
+int GraphAlgorithm::findAugementingPathImproved(int s) {
+    fout << "Start finding augmenting path from " << s << endl;
+    while (!Util::queueEmpty()) {
+        int i = Util::popQueue();
+        for (int j = 1; j <= k; ++j) {
+            if (NO_NODE == trace[j]) {
+                int w = getC(i, j);
+                fout << "Try edge: " << i << "->" << j << ". Weight = " << w << endl;
+                if (0 == w) {
+                    trace[j] = i;
+                    fout << "Add the edge " << i << "->" << j << " to path. ";
+                    if (NO_NODE == matchY[j]) {
+                        fout << "Node j = " << j << " is unmatched node." << endl;
+                        return j;
+                    }
+                    Util::pushQueue(matchY[j]);
+                    fout << "Push X = " << matchY[j] << " to queue." << endl;
+                }
+                if (dy[j] > w) {
+                    dy[j] = w;
+                    arg[j] = i;
+                    fout << "Current dy[" << j << "] = " << dy[j] << " arg[" << j << "] = " << arg[j] << endl;
+                }
+            }
+        }
+    }
+    return NO_NODE;
+}
+
+int GraphAlgorithm::subX_addY_improved(int s) {
+    int delta = INF;
+    for (int j = 1; j <= k; ++j)
+        if (NO_NODE == trace[j] && dy[j] < delta) {
+            delta = dy[j];
+            fout << "Delta = " << delta << " with y = " << j << endl;
+        }
+    
+    fx[s] += delta;
+    
+    for (int j = 1; j <= k; ++j) {
+        if (NO_NODE != trace[j]) {
+            int i = matchY[j];
+            fy[j] -= delta;
+            fx[i] += delta;
+        }
+        else {
+            dy[j] -= delta;
+            fout << "Current dy[" << j << "] = " << dy[j] << " arg[" << j << "] = " << arg[j] << endl;
+        }
+    }
+    printHungariGraph();
+    
+    for (int j = 1; j <= k; ++j) {
+        if (NO_NODE == trace[j] && 0 == dy[j]) {
+            trace[j] = arg[j];
+            if (NO_NODE == matchY[j]) return j;
+            Util::pushQueue(matchY[j]);
+            fout << "Push X = " << matchY[j] << " to queue." << endl;
+        }
+    }
+    return NO_NODE;
+}
+
+void GraphAlgorithm::hungariImproved() {
+    fout << "Running Hungari IMPROVED algorithm to find maximum matching with minimum weight on bipartite graph:" << endl;
+    if (BIPARTITE != _pType) {
+        fout << "ERROR: This algorithm runs on bipartite graph only!" << endl;
+        return;
+    }
+    if (WEIGHT != g.wType()) {
+        fout << "ERROR: This algorithm runs on weight graph only!" << endl;
+        return;
+    }
+    
+    initHungary();
+    printHungariGraph();
+    for (int i = 1; i <= k; ++i) {
+        initBfs(i);
+        int f = NO_NODE;
+        do {
+            f = findAugementingPathImproved(i);
+            if (NO_NODE == f) {
+                fout << "Not found unmatched Y. Start rotating matrix." << endl;
+                f = subX_addY_improved(i);
+            }
+        } while (NO_NODE == f);
+        fout << "Found unmatched f = " << f << endl;
+        enlarge(f);
+        printHungariGraph();
+    }
+    printHungariResult();
+}
 }
