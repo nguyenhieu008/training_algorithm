@@ -54,6 +54,7 @@ GraphAlgorithm::GraphAlgorithm(const string &inFile, const string &outFile, cons
             d[i] = INFINITY;
             _pos[i] = NO_NODE;
             label[i] = -1; // negative number of node in tree root i
+            match[i] = NO_NODE; // Edmonds
         }
         nHeap = 0;
         for (int i = 1; i <= g.n(); ++i) {
@@ -255,6 +256,127 @@ bool Util::queueEmpty() {
 void Util::resetQueue() {
     Util::_first = 0;
     Util::_last = 0;
+}
+
+void GraphAlgorithm::initBfsEdmonds() {
+    Util::resetQueue();
+    Util::pushQueue(s);
+    for (int i = 1; i <= g.n(); ++i) {
+        inQueue[i] = false;
+        _t[i] = NO_NODE;
+        _b[i] = i;
+    }
+    inQueue[s] = true;
+    f = 0;
+}
+
+void GraphAlgorithm::blossomShrink(int p, int q) {
+    for (int i = 1; i <= g.n(); ++i) _mark[i] = false;
+    int newBase = findCommonAncestor(p, q);
+    resetTrace(p, newBase); resetTrace(q, newBase);
+    if (newBase != _b[p]) _t[p] = q;
+    if (newBase != _b[q]) _t[q] = p;
+    
+    for (int i = 1; i <= g.n(); ++i) {
+        if (_mark[_b[i]]) _b[i] = newBase;
+    }
+    for (int i = 1; i <= g.n(); ++i) {
+        if (!inQueue[i] && newBase == _b[i]) Util::pushQueue(i);
+    }
+}
+
+int GraphAlgorithm::findCommonAncestor(int p, int q) {
+    bool inPath[MAX] = {false, };
+    while (true) {
+        p = _b[p];
+        inPath[p] = true;
+        if (s == p) break;
+        p = _t[match[p]];
+    }
+    while (true) {
+        q = _b[q];
+        if (inPath[q]) break;
+        q = _t[match[q]];
+    }
+    return q;
+}
+
+void GraphAlgorithm::resetTrace(int x, int newBase) {
+    int u, v = x;
+    while (newBase != _b[v]) {
+        u = match[v];
+        _mark[_b[v]] = true;
+        _mark[_b[u]] = true;
+        v = _t[u];
+        if (newBase != _b[v]) _t[v] = u;
+    }
+}
+
+void GraphAlgorithm::findAugmentingPathEdmonds() {
+    initBfsEdmonds();
+    while (!Util::queueEmpty()) {
+        int u = Util::popQueue();
+        for (int v = 1; v <= g.n(); ++v) {
+            if (NO_NODE == _t[v] && g[u][v] && (_b[v] != _b[u])) {
+                if (NO_NODE == match[v]) {
+                    _t[v] = u;
+                    f = v;
+                    return ;
+                }
+                if (s == v || NO_NODE != _t[match[v]]) {
+                    blossomShrink(u, v);
+                }
+                else {
+                    _t[v] = u;
+                    Util::pushQueue(match[v]);
+                }
+            }
+        }
+    }
+}
+
+void GraphAlgorithm::enlarge() {
+    int v, next;
+    do {
+        v = _t[f];
+        next = match[v];
+        match[v] = f;
+        match[f] = v;
+        fout << "New match " << s << " - " << f << ", next = " << next << endl;
+        f = next;
+    } while (NO_NODE != f);
+}
+
+void GraphAlgorithm::printEdmondsResult() {
+    int count = 0;
+    for (int u = 1; u <= g.n(); ++u) {
+        if (match[u] > u) {
+            fout << ++count << ") " << u << " " << match[u] << endl;
+        }
+    }
+}
+
+void GraphAlgorithm::edmonds() {
+    fout << "Running Edmonds algorith using Lawler method to find maximum matching on generic graph:" << endl;
+    if (NORMAL != _pType || SINGLE != g.nType() || UNDIRECTED != g.dType() || UNWEIGHT != g.wType()) {
+        fout << "This algorithm does not support this type of graph!" << endl;
+        exit(10);
+    }
+    for (int u = 1; u <= g.n(); ++u) {
+        fout << "Check node " << u << ". ";
+        if (NO_NODE == match[u]) {
+            fout << "Start finding augmenting path from node " << u << ":" << endl;
+            s = u;
+            findAugmentingPathEdmonds();
+            if (NO_NODE != f) {
+                fout << "Found new unmatched node FINISH = " << f << endl;
+                enlarge();
+            }
+        }
+        fout << endl;
+    }
+    
+    printEdmondsResult();
 }
 
 }

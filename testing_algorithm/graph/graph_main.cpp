@@ -4,9 +4,9 @@
 namespace graph {
 
 void GraphAlgorithm::mainGraph() {
-    GraphAlgorithm g("data/assign.inp", "data/graph.out", BIPARTITE, UNDIRECTED, SINGLE, WEIGHT);
+    GraphAlgorithm g("data/gmatch.inp", "data/graph.out", NORMAL, UNDIRECTED, SINGLE, UNWEIGHT);
     g.input();
-    g.hungariImproved();
+    g.edmonds();
 //    g.augmentingPath();
 }
 }

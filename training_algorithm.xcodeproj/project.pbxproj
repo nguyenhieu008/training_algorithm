@@ -81,6 +81,7 @@
 		788654AB24DAE23E00C8310A /* graph_spanning_tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graph_spanning_tree.cpp; sourceTree = "<group>"; };
 		78874FA624C7362F00234635 /* dfs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = dfs.cpp; sourceTree = "<group>"; };
 		788B5F3A24ED87300089A6B3 /* assign.inp */ = {isa = PBXFileReference; lastKnownFileType = text; path = assign.inp; sourceTree = "<group>"; };
+		788ED66624FD72A40027EC72 /* gmatch.inp */ = {isa = PBXFileReference; lastKnownFileType = text; path = gmatch.inp; sourceTree = "<group>"; };
 		78989D6424A7BAD300B97B81 /* sort_quick.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = sort_quick.cpp; sourceTree = "<group>"; };
 		7899BF7D24D576EE007E2D87 /* graph_generic.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = graph_generic.h; sourceTree = "<group>"; };
 		7899BF7E24D576EE007E2D87 /* graph_connectivity.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graph_connectivity.cpp; sourceTree = "<group>"; };
@@ -133,6 +134,7 @@
 				781854AF24D987130032A825 /* minpath.inp */,
 				781854B024D987130032A825 /* graph.inp */,
 				788B5F3A24ED87300089A6B3 /* assign.inp */,
+				788ED66624FD72A40027EC72 /* gmatch.inp */,
 			);
 			path = data;
 			sourceTree = "<group>";

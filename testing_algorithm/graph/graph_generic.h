@@ -222,7 +222,7 @@ private:
     int trace[MAX];
     int **traceFloyd; // floyd algo. Next vertice on the path from u->v
     bool _free[MAX];
-    bool _mark[MAX]; // cut vertices, mark node is cut vertices?
+    bool _mark[MAX]; // cut vertices, mark node is cut vertices?, Edmonds
     int nC[MAX]; // cut vertices, num of children
     int x[MAX]; // hamilton path
     int numbering[MAX], low[MAX], count, componentCount;
@@ -239,7 +239,8 @@ private:
     int fx[MAX], fy[MAX]; // Hungari
     int dy[MAX]; // distance from y to augmenting tree
     int arg[MAX]; // vertice X corresponds to dy
-    
+    int match[MAX], _b[MAX], _t[MAX]; // Edmonds algorithm
+    bool inQueue[MAX]; // Edmonds algorithm
 
     void dfs(int u);
     int findNext(int u); //dfs
@@ -289,5 +290,14 @@ private:
     int findAugementingPathImproved(int s); // Hungari improved
     int subX_addY_improved(int s); // Hungari improved
     void hungariImproved();
+    
+    void initBfsEdmonds();
+    void blossomShrink(int p, int q);
+    int findCommonAncestor(int p, int q);
+    void resetTrace(int x, int newBase);
+    void findAugmentingPathEdmonds();
+    void enlarge(); //Edmonds
+    void printEdmondsResult();
+    void edmonds();
 };
 }
