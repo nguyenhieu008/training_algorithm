@@ -15,8 +15,9 @@ int bestD;
 
 void input() {
     // cout << "Enter n, m: " << endl;
-    ifstream myfile("travelingSalesman.inp");
+    ifstream myfile("generation_backtracking_nhanhCan/travelingSalesman.inp");
     myfile >> n >> m;
+//    cout << n << " " << m << endl;
 
     for (int i = 1; i <= n; ++i) {
         fill(c[i], c[i] + n + 1, INT_MAX);

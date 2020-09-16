@@ -47,10 +47,10 @@ public:
     
     void printResult(ofstream &fout, int t) {
         fout << "Case " << t << " takes " << dur.count() << " microseconds:" << endl;
-//        for (int i = 0; i < n; ++i) {
-//            fout << x[i] << " ";
-//        }
-//        fout << endl;
+        for (int i = 0; i < n; ++i) {
+            fout << x[i] << " ";
+        }
+        fout << endl;
     }
     
     void selectionSort();

@@ -12,8 +12,8 @@ using namespace sorting;
 namespace sorting {
 
 int main() {
-    ifstream fin("sort_data.inp.1");
-    ofstream fout("sort_result.out.1");
+    ifstream fin("sort/sort.inp");
+    ofstream fout("sort_result.out");
     
     Sort s;
     int T, t;
