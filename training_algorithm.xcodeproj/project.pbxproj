@@ -83,6 +83,9 @@
 		7886010A24A10BB300CBC570 /* list_permutes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = list_permutes.cpp; sourceTree = "<group>"; };
 		788654AB24DAE23E00C8310A /* graph_spanning_tree.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = graph_spanning_tree.cpp; sourceTree = "<group>"; };
 		78874FA624C7362F00234635 /* dfs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = dfs.cpp; sourceTree = "<group>"; };
+		788829682513B493008A33E3 /* template_main.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = template_main.txt; sourceTree = "<group>"; };
+		788829692513C6D9008A33E3 /* e.inp */ = {isa = PBXFileReference; lastKnownFileType = text; path = e.inp; sourceTree = "<group>"; };
+		7888296A2513D076008A33E3 /* template_dijkstra.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = template_dijkstra.txt; sourceTree = "<group>"; };
 		788B5F3A24ED87300089A6B3 /* assign.inp */ = {isa = PBXFileReference; lastKnownFileType = text; path = assign.inp; sourceTree = "<group>"; };
 		788DBC1E251266FC005C95CC /* a.inp */ = {isa = PBXFileReference; lastKnownFileType = text; path = a.inp; sourceTree = "<group>"; };
 		788DBC1F251271E5005C95CC /* 2019a.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = 2019a.cpp; sourceTree = "<group>"; };
@@ -164,9 +167,11 @@
 		781F477B249F5000005455E9 /* testing_algorithm */ = {
 			isa = PBXGroup;
 			children = (
+				788829672513B493008A33E3 /* codejam_template */,
 				788DBC1B251253DC005C95CC /* Codejam2019 */,
 				781854A724D987130032A825 /* data */,
 				7899BF8C24D57723007E2D87 /* main.cpp */,
+				788829692513C6D9008A33E3 /* e.inp */,
 				788DBC1E251266FC005C95CC /* a.inp */,
 				78874FA524C7357700234635 /* graph */,
 				78BF1A7E24B4B83C00EEC457 /* generation_backtracking_nhanhCan */,
@@ -193,6 +198,15 @@
 				78874FA624C7362F00234635 /* dfs.cpp */,
 			);
 			path = graph;
+			sourceTree = "<group>";
+		};
+		788829672513B493008A33E3 /* codejam_template */ = {
+			isa = PBXGroup;
+			children = (
+				788829682513B493008A33E3 /* template_main.txt */,
+				7888296A2513D076008A33E3 /* template_dijkstra.txt */,
+			);
+			path = codejam_template;
 			sourceTree = "<group>";
 		};
 		788DBC1B251253DC005C95CC /* Codejam2019 */ = {
